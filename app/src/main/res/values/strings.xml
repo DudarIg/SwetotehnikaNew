@@ -1,3 +1,15 @@
 <resources>
-    <string name="app_name">Swetotehnika</string>
+    <string name="app_name">Светотехника</string>
+    <string name="cat_name">Каталог продукции</string>
+    <string name="nav_header_title">https://swetotehnika.ru </string>
+    <string name="nav_header_subtitle">+7 (495) 798-05-32, (495) 798-82-47</string>
+    <string name="action_settings">На главную</string>
+    <string name="menu_home">Главная</string>
+    <string name="menu_gallery">Каталог</string>
+    <string name="menu_slideshow">Прайсы</string>
+    <string name="menu_contact">Контакты</string>
+    <string name="check_connection_text">Интернет-соединение отсутствует</string>
+
+    <string name="url">"https://swetotehnika.ru/"</string>
+    <string name="exit">Выход</string>
 </resources>
