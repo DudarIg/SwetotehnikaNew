@@ -1,10 +1,12 @@
-package ru.dudar_ig.swetotehnika
+package ru.dudar_ig.swetotehnika.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import ru.dudar_ig.swetotehnika.ui.catalog.MainFragment
+import ru.dudar_ig.swetotehnika.R
 import ru.dudar_ig.swetotehnika.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {

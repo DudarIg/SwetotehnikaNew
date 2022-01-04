@@ -7,40 +7,37 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 
 class CatViewModel: ViewModel() {
-    private val _items = MutableLiveData<List<Tovar>>()
-    val items: LiveData<List<Tovar>> get() = _items
+    val items : LiveData<List<Tovar>>?
     init {
-        viewModelScope.launch {
-            _items.value = CatalogApiImpl.getListCat()
-        }
+        items = CatalogApiImpl.loadListCat()
     }
 }
 
-class Cat2ViewModel : ViewModel() {
-    private val _items = MutableLiveData<List<Tovar>>()
-    val items: LiveData<List<Tovar>> get() = _items
-    init {
-        viewModelScope.launch {
-            _items.value = CatalogApiImpl.getListCat2()
-        }
-    }
-}
-
-class TovarListViewModel : ViewModel() {
-    private val _items = MutableLiveData<List<Tovar>>()
-    val items: LiveData<List<Tovar>> get() = _items
-    init {
-        viewModelScope.launch {
-            _items.value = CatalogApiImpl.getListTovars()
-        }
-    }
-}
-class TovarViewModel : ViewModel() {
-    private val _items = MutableLiveData<List<Tovar>>()
-    val items: LiveData<List<Tovar>> get() = _items
-    init {
-        viewModelScope.launch {
-            _items.value = CatalogApiImpl.getProduct()
-        }
-    }
-}
+//class Cat2ViewModel : ViewModel() {
+//    private val _items = MutableLiveData<List<Tovar>>()
+//    val items: LiveData<List<Tovar>> get() = _items
+//    init {
+//        viewModelScope.launch {
+//            _items.value = CatalogApiImpl.getListCat2()
+//        }
+//    }
+//}
+//
+//class TovarListViewModel : ViewModel() {
+//    private val _items = MutableLiveData<List<Tovar>>()
+//    val items: LiveData<List<Tovar>> get() = _items
+//    init {
+//        viewModelScope.launch {
+//            _items.value = CatalogApiImpl.getListTovars()
+//        }
+//    }
+//}
+//class TovarViewModel : ViewModel() {
+//    private val _items = MutableLiveData<List<Tovar>>()
+//    val items: LiveData<List<Tovar>> get() = _items
+//    init {
+//        viewModelScope.launch {
+//            _items.value = CatalogApiImpl.getProduct()
+//        }
+//    }
+//}

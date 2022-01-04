@@ -1,19 +1,16 @@
 package ru.dudar_ig.swetotehnika.data
 
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
+import com.google.gson.annotations.SerializedName
 
 
-@JsonClass(generateAdapter = true)
 data class ApiCatalog(
-    @Json(name = "records") val results: List<Result>
+    @SerializedName("records") val results: List<Result>
 )
 
-@JsonClass(generateAdapter = true)
 data class Result(
-    @Json(name = "id") val id: String?,
-    @Json(name = "name") val name: String?,
-    @Json(name = "prop") val prop: String?,
-    @Json(name = "foto") val foto: String?,
-    @Json(name = "price") val price: String?
+    @SerializedName("id") val id: String?,
+    @SerializedName("name") val name: String?,
+    @SerializedName("prop") val prop: String?,
+    @SerializedName("foto") val foto: String?,
+    @SerializedName("price") val price: String?
 )

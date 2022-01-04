@@ -1,9 +1,9 @@
 package ru.dudar_ig.swetotehnika.data
 
 data class Tovar(
-    val id: String?,
-    val name: String?,
-    val prop: String?,
-    val foto: String?,
-    val price: String?
+    var id: String? = null,
+    var name: String? = null,
+    var prop: String? = null,
+    var foto: String? = null,
+    var price: String? = null
 )
