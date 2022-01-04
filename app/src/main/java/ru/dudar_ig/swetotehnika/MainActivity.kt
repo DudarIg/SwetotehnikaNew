@@ -1,30 +1,16 @@
 package ru.dudar_ig.swetotehnika
 
-import android.content.ClipData
-import android.net.wifi.hotspot2.pps.HomeSp
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.MenuItem
 import android.view.View
-import android.widget.Button
 import android.widget.Toast
-import androidx.appcompat.view.menu.MenuView
 import androidx.fragment.app.Fragment
 import ru.dudar_ig.swetotehnika.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-
-  private  lateinit var navLists: MutableList<View>
-   // private lateinit var navHome: View
-    private lateinit var navCatalog: View
-    private lateinit var navZakaz: View
-    private lateinit var navPrice: View
-    private lateinit var navContact: View
-
-
-
+    private  lateinit var navLists: MutableList<View>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,14 +21,11 @@ class MainActivity : AppCompatActivity() {
 
         val mainFragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
         if (mainFragment == null) {
-
-           // navLists[0].isClickable = false
             val fragment = MainFragment.newInstance()
             supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, fragment)
                 .commit()
         }
-
     }
 
     private fun navClickable(iters: Int) {
@@ -52,12 +35,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initBottomNav() {
-
-       // navHome = findViewById(R.id.nav_home)
-        navCatalog = findViewById(R.id.nav_catalog)
-        navZakaz = findViewById(R.id.nav_zakaz)
-        navPrice = findViewById(R.id.nav_price)
-        navContact = findViewById(R.id.nav_contact)
+        val navCatalog = findViewById<View>(R.id.nav_catalog)
+        val navZakaz = findViewById<View>(R.id.nav_zakaz)
+        val navPrice = findViewById<View>(R.id.nav_price)
+        val navContact = findViewById<View>(R.id.nav_contact)
 
         navLists = mutableListOf( navCatalog, navZakaz, navPrice, navContact)
 
@@ -65,40 +46,27 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNav.setOnItemSelectedListener { item ->
             val fragment : Fragment
             when (item.itemId) {
-//                R.id.nav_home -> {
-//                    fragment = MainFragment.newInstance()
-//                   // navLists[0].isClickable = false
-//                    navClickable(0)
-//
-//                }
                 R.id.nav_catalog -> {
                     Toast.makeText(this, "Выбран каталог", Toast.LENGTH_SHORT).show()
                     fragment = MainFragment.newInstance()
-                    //navLists[1].isClickable = false
-                    navClickable(1)
-
+                    navClickable(0)
                 }
                 R.id.nav_zakaz -> {
                     Toast.makeText(this, "Выбран заказ", Toast.LENGTH_SHORT).show()
                     fragment = MainFragment.newInstance()
-                    //navLists[2].isClickable = false
-                   navClickable(2)
+                   navClickable(1)
                 }
                 R.id.nav_price -> {
                     Toast.makeText(this, "Выбран прайс", Toast.LENGTH_SHORT).show()
                     fragment = MainFragment.newInstance()
-                    //navLists[3].isClickable = false
-                    navClickable(3)
+                    navClickable(2)
                 }
                 R.id.nav_contact -> {
                     Toast.makeText(this, "Выбран контакт", Toast.LENGTH_SHORT).show()
                     fragment = MainFragment.newInstance()
-                    //navLists[4].isClickable = false
-                    navClickable(4)
+                    navClickable(3)
                 }
                 else -> {
-//                    intent = Intent(this,GlobusActivity::class.java )
-//                    startActivity(intent)
                     fragment = MainFragment.newInstance()
                 }
             }
