@@ -6,6 +6,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
+import ru.dudar_ig.swetotehnika.KatId
 
 interface CatalogApi {
     @GET("/api/category/read.php")
@@ -46,9 +47,9 @@ object CatalogApiImpl {
         }
     }
 
-    suspend fun getListCat2(id: Int): List<Tovar> {
+    suspend fun getListCat2(): List<Tovar> {
         return withContext(Dispatchers.IO) {
-            apiService.getListCat2(id)
+            apiService.getListCat2(KatId.id)
                 .results
                 .map { result ->
                     Tovar(
@@ -61,9 +62,9 @@ object CatalogApiImpl {
                 }
         }
     }
-    suspend fun getListTovars(id: Int): List<Tovar> {
+    suspend fun getListTovars(): List<Tovar> {
         return withContext(Dispatchers.IO) {
-            apiService.getListTovars(id)
+            apiService.getListTovars(KatId.id)
                 .results
                 .map { result ->
                     Tovar(
@@ -76,9 +77,9 @@ object CatalogApiImpl {
                 }
         }
     }
-    suspend fun getProduct(id: Int): List<Tovar> {
+    suspend fun getProduct(): List<Tovar> {
         return withContext(Dispatchers.IO) {
-            apiService.getProduct(id)
+            apiService.getProduct(KatId.id)
                 .results
                 .map { result ->
                     Tovar(
