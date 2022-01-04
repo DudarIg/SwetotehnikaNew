@@ -10,7 +10,7 @@ import ru.dudar_ig.swetotehnika.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private  lateinit var navLists: MutableList<View>
+    private var navLists = mutableListOf<View>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,13 +35,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initBottomNav() {
-        val navCatalog = findViewById<View>(R.id.nav_catalog)
-        val navZakaz = findViewById<View>(R.id.nav_zakaz)
-        val navPrice = findViewById<View>(R.id.nav_price)
-        val navContact = findViewById<View>(R.id.nav_contact)
-
-        navLists = mutableListOf( navCatalog, navZakaz, navPrice, navContact)
-
+        navLists.add(findViewById(R.id.nav_catalog))
+        navLists.add(findViewById(R.id.nav_zakaz))
+        navLists.add(findViewById(R.id.nav_price))
+        navLists.add(findViewById(R.id.nav_contact))
 
         binding.bottomNav.setOnItemSelectedListener { item ->
             val fragment : Fragment
