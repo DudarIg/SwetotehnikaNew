@@ -1,10 +1,8 @@
 package ru.dudar_ig.swetotehnika.data
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.launch
+import ru.dudar_ig.swetotehnika.KatId
 
 class CatViewModel: ViewModel() {
     val items : LiveData<List<Tovar>>?
@@ -13,31 +11,23 @@ class CatViewModel: ViewModel() {
     }
 }
 
-//class Cat2ViewModel : ViewModel() {
-//    private val _items = MutableLiveData<List<Tovar>>()
-//    val items: LiveData<List<Tovar>> get() = _items
-//    init {
-//        viewModelScope.launch {
-//            _items.value = CatalogApiImpl.getListCat2()
-//        }
-//    }
-//}
-//
-//class TovarListViewModel : ViewModel() {
-//    private val _items = MutableLiveData<List<Tovar>>()
-//    val items: LiveData<List<Tovar>> get() = _items
-//    init {
-//        viewModelScope.launch {
-//            _items.value = CatalogApiImpl.getListTovars()
-//        }
-//    }
-//}
-//class TovarViewModel : ViewModel() {
-//    private val _items = MutableLiveData<List<Tovar>>()
-//    val items: LiveData<List<Tovar>> get() = _items
-//    init {
-//        viewModelScope.launch {
-//            _items.value = CatalogApiImpl.getProduct()
-//        }
-//    }
-//}
+class Cat2ViewModel: ViewModel() {
+    val items : LiveData<List<Tovar>>?
+    init {
+        items = CatalogApiImpl.loadListCat2(KatId.id)
+    }
+}
+
+class TovarsViewModel: ViewModel() {
+    val items : LiveData<List<Tovar>>?
+    init {
+        items = CatalogApiImpl.loadListTovars(KatId.id)
+    }
+}
+
+class ProductViewModel: ViewModel() {
+    val items : LiveData<List<Tovar>>?
+    init {
+        items = CatalogApiImpl.loadProduct(KatId.id)
+    }
+}

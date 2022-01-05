@@ -58,52 +58,70 @@ object CatalogApiImpl {
         })
         return responseLiveData
     }
-
-//    suspend fun getListCat2(): List<Tovar> {
-//        return withContext(Dispatchers.IO) {
-//            apiService.getListCat2(KatId.id)
-//                .results
-//                .map { result ->
-//                    Tovar(
-//                        result.id,
-//                        result.name,
-//                        null,
-//                        null,
-//                        null
-//                    )
-//                }
-//        }
-//    }
-//    suspend fun getListTovars(): List<Tovar> {
-//        return withContext(Dispatchers.IO) {
-//            apiService.getListTovars(KatId.id)
-//                .results
-//                .map { result ->
-//                    Tovar(
-//                        result.id,
-//                        result.name,
-//                        null,
-//                        result.foto,
-//                        result.price
-//                    )
-//                }
-//        }
-//    }
-//    suspend fun getProduct(): List<Tovar> {
-//        return withContext(Dispatchers.IO) {
-//            apiService.getProduct(KatId.id)
-//                .results
-//                .map { result ->
-//                    Tovar(
-//                        result.id,
-//                        result.name,
-//                        result.prop,
-//                        result.foto,
-//                        result.price
-//                    )
-//                }
-//        }
-//    }
-
+    fun loadListCat2(id: Int): LiveData<List<Tovar>> {
+        val responseLiveData: MutableLiveData<List<Tovar>> = MutableLiveData()
+        apiService.getListCat2(id).enqueue(object : Callback<ApiCatalog> {
+            override fun onResponse(call: Call<ApiCatalog>, response: Response<ApiCatalog>) {
+                val jsonCatalog: ApiCatalog? = response.body()
+                val catList = mutableListOf<Tovar>()
+                jsonCatalog?.results?.forEach {
+                    val tovar = Tovar()
+                    tovar.id = it.id
+                    tovar.name = it.name
+                    catList.add(tovar)
+                }
+                responseLiveData.postValue(catList)
+            }
+            override fun onFailure(call: Call<ApiCatalog>, t: Throwable) {
+                TODO("Not yet implemented")
+            }
+        })
+        return responseLiveData
+    }
+    fun loadListTovars(id: Int): LiveData<List<Tovar>> {
+        val responseLiveData: MutableLiveData<List<Tovar>> = MutableLiveData()
+        apiService.getListTovars(id).enqueue(object : Callback<ApiCatalog> {
+            override fun onResponse(call: Call<ApiCatalog>, response: Response<ApiCatalog>) {
+                val jsonCatalog: ApiCatalog? = response.body()
+                val catList = mutableListOf<Tovar>()
+                jsonCatalog?.results?.forEach {
+                    val tovar = Tovar()
+                    tovar.id = it.id
+                    tovar.name = it.name
+                    tovar.foto = it.foto
+                    tovar.price = it.price
+                    catList.add(tovar)
+                }
+                responseLiveData.postValue(catList)
+            }
+            override fun onFailure(call: Call<ApiCatalog>, t: Throwable) {
+                TODO("Not yet implemented")
+            }
+        })
+        return responseLiveData
+    }
+    fun loadProduct(id: Int): LiveData<List<Tovar>> {
+        val responseLiveData: MutableLiveData<List<Tovar>> = MutableLiveData()
+        apiService.getProduct(id).enqueue(object : Callback<ApiCatalog> {
+            override fun onResponse(call: Call<ApiCatalog>, response: Response<ApiCatalog>) {
+                val jsonCatalog: ApiCatalog? = response.body()
+                val catList = mutableListOf<Tovar>()
+                jsonCatalog?.results?.forEach {
+                    val tovar = Tovar()
+                    tovar.id = it.id
+                    tovar.name = it.name
+                    tovar.prop = it.prop
+                    tovar.foto = it.foto
+                    tovar.price = it.price
+                    catList.add(tovar)
+                }
+                responseLiveData.postValue(catList)
+            }
+            override fun onFailure(call: Call<ApiCatalog>, t: Throwable) {
+                TODO("Not yet implemented")
+            }
+        })
+        return responseLiveData
+    }
 
 }

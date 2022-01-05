@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_catalog -> {
                     Toast.makeText(this, "Выбран каталог", Toast.LENGTH_SHORT).show()
                     fragment = MainFragment.newInstance()
-                    navClickable(0)
+                    //navClickable(0)
                 }
                 R.id.nav_zakaz -> {
                     Toast.makeText(this, "Выбран заказ", Toast.LENGTH_SHORT).show()
