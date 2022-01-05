@@ -1,16 +1,18 @@
-package ru.dudar_ig.swetotehnika
+package ru.dudar_ig.swetotehnika.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import ru.dudar_ig.swetotehnika.ui.catalog.MainFragment
+import ru.dudar_ig.swetotehnika.R
 import ru.dudar_ig.swetotehnika.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private  lateinit var navLists: MutableList<View>
+    private var navLists = mutableListOf<View>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,7 +23,7 @@ class MainActivity : AppCompatActivity() {
 
         val mainFragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
         if (mainFragment == null) {
-            val fragment = MainFragment.newInstance()
+            val fragment = OneFragment.newInstance("null", "null")
             supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, fragment)
                 .commit()
@@ -35,13 +37,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initBottomNav() {
-        val navCatalog = findViewById<View>(R.id.nav_catalog)
-        val navZakaz = findViewById<View>(R.id.nav_zakaz)
-        val navPrice = findViewById<View>(R.id.nav_price)
-        val navContact = findViewById<View>(R.id.nav_contact)
-
-        navLists = mutableListOf( navCatalog, navZakaz, navPrice, navContact)
-
+        navLists.add(findViewById(R.id.nav_catalog))
+        navLists.add(findViewById(R.id.nav_zakaz))
+        navLists.add(findViewById(R.id.nav_price))
+        navLists.add(findViewById(R.id.nav_contact))
 
         binding.bottomNav.setOnItemSelectedListener { item ->
             val fragment : Fragment
