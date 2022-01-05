@@ -19,6 +19,7 @@ class MyAdapter(var listArray: ArrayList<Tovar>) : RecyclerView.Adapter<MyAdapte
 //    var context = contextM
     var funCatClick: ((Tovar) -> Unit)? = null
     var funListClick: ((Tovar) -> Unit)? = null
+    var funProductClick: ((Tovar) -> Unit)? = null
 
     class MyHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val iv = itemView
@@ -76,6 +77,9 @@ class MyAdapter(var listArray: ArrayList<Tovar>) : RecyclerView.Adapter<MyAdapte
             }
             if (KatId.kat == 2) {
                 funListClick?.invoke(listArray.get(position))
+            }
+            if (KatId.kat == 3) {
+                funProductClick?.invoke(listArray.get(position))
             }
 //                if (KatId.kat == 2) {
 //                    val intent = Intent(context, MainActivity3::class.java).apply {

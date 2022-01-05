@@ -2,7 +2,6 @@ package ru.dudar_ig.swetotehnika.ui.catalog
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.fragment.app.viewModels
@@ -42,15 +41,17 @@ class ListTovarFragment : Fragment(R.layout.fragment_kat) {
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
         binding.recyclerView.adapter = myAdapter
 
-        Log.d("QQQ", "программа дошла 3")
+        myAdapter.funProductClick = {
+            val fragment = ProductFragment.newInstance(it.id!!.toInt(), it.name!!)
+            activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.fragment_container,
+                fragment)?.addToBackStack(null)?.commit()
+        }
+
         tovarsViewModel.items?.observe(this, Observer {
             KatId.kat = 3
             it ?: return@Observer
             myAdapter.updateAdapter(it)
-
-            Log.d("QQQ", "программа дошла 3 KatId.kat= ${KatId.kat}")
         })
-
 
     }
 
@@ -59,12 +60,10 @@ class ListTovarFragment : Fragment(R.layout.fragment_kat) {
         super.onAttach(context)
     }
 
-
-
     companion object {
         @JvmStatic
         fun newInstance(param1: Int, param2: String) =
-            Cat2Fragment().apply {
+            ListTovarFragment().apply {
                 arguments = Bundle().apply {
                     putInt(ARG_IDD, param1)
                     putString(ARG_IDD_NAME, param2)

@@ -41,11 +41,12 @@ class MainFragment : Fragment(R.layout.fragment_kat) {
             KatId.kat = 1
             it ?: return@Observer
             myAdapter.updateAdapter(it)
-
-            Log.d("QQQ", "программа дошла 1 KatId.kat= ${KatId.kat}")
         })
     }
-
+    override fun onAttach(context: Context) {
+        KatId.kat = 1
+        super.onAttach(context)
+    }
 
     companion object {
         @JvmStatic
