@@ -25,8 +25,6 @@ class MainFragment : Fragment(R.layout.fragment_kat) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentKatBinding.bind(view)
 
-       // KatId.kat = 1
-
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
         binding.recyclerView.adapter = myAdapter
 

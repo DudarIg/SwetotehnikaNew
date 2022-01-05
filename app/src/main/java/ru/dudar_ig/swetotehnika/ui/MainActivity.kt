@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
 
         val mainFragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
         if (mainFragment == null) {
-            val fragment = MainFragment.newInstance()
+            val fragment = OneFragment.newInstance("null", "null")
             supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, fragment)
                 .commit()
