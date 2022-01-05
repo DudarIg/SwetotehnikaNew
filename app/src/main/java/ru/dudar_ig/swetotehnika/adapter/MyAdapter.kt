@@ -18,6 +18,7 @@ class MyAdapter(var listArray: ArrayList<Tovar>) : RecyclerView.Adapter<MyAdapte
 //    var listArray = listMain
 //    var context = contextM
     var funCatClick: ((Tovar) -> Unit)? = null
+    var funListClick: ((Tovar) -> Unit)? = null
 
     class MyHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val iv = itemView
@@ -45,6 +46,7 @@ class MyAdapter(var listArray: ArrayList<Tovar>) : RecyclerView.Adapter<MyAdapte
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyHolder {
         val inflater = LayoutInflater.from(parent.context) // спецкласс для надувания rc_shablon.xml
+
         if (KatId.kat==3) {
             val view = inflater.inflate(R.layout.layout_item_products, parent, false)
             return MyHolder(view)
@@ -68,9 +70,12 @@ class MyAdapter(var listArray: ArrayList<Tovar>) : RecyclerView.Adapter<MyAdapte
         holder.setData(listArray.get(position))
 
         // обработчик нажатия на строку RecyclerViev
-        holder.itemView.setOnClickListener {
+        holder.iv.setOnClickListener {
             if (KatId.kat == 1) {
                 funCatClick?.invoke(listArray.get(position))
+            }
+            if (KatId.kat == 2) {
+                funListClick?.invoke(listArray.get(position))
             }
 //                if (KatId.kat == 2) {
 //                    val intent = Intent(context, MainActivity3::class.java).apply {

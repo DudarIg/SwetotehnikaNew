@@ -11,18 +11,29 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import ru.dudar_ig.swetotehnika.KatId
 import ru.dudar_ig.swetotehnika.R
 import ru.dudar_ig.swetotehnika.adapter.MyAdapter
-import ru.dudar_ig.swetotehnika.data.CatViewModel
+import ru.dudar_ig.swetotehnika.data.TovarsViewModel
 import ru.dudar_ig.swetotehnika.databinding.FragmentKatBinding
-import ru.dudar_ig.swetotehnika.ui.OneFragment
 
+private const val ARG_IDD = "param1"
+private const val ARG_IDD_NAME = "param2"
 
-class MainFragment : Fragment(R.layout.fragment_kat) {
+class ListTovarFragment : Fragment(R.layout.fragment_kat) {
+
+    private var idName: String? = null
 
     private var _binding: FragmentKatBinding?  = null
     private val binding get() = _binding!!
 
     private val myAdapter = MyAdapter(ArrayList())
-    private val catViewModel by viewModels<CatViewModel>()
+    private val tovarsViewModel by viewModels<TovarsViewModel>()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+            KatId.id = it.getInt(ARG_IDD)
+            idName = it.getString(ARG_IDD_NAME)
+        }
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -31,27 +42,35 @@ class MainFragment : Fragment(R.layout.fragment_kat) {
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
         binding.recyclerView.adapter = myAdapter
 
-        myAdapter.funCatClick = {
-                val fragment = Cat2Fragment.newInstance(it.id!!.toInt(), it.name!!)
-                activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.fragment_container,
-                    fragment)?.addToBackStack(null)?.commit()
-        }
-
-        catViewModel.items?.observe(this, Observer {
-            KatId.kat = 1
+        Log.d("QQQ", "программа дошла 3")
+        tovarsViewModel.items?.observe(this, Observer {
+            KatId.kat = 3
             it ?: return@Observer
             myAdapter.updateAdapter(it)
 
-            Log.d("QQQ", "программа дошла 1 KatId.kat= ${KatId.kat}")
+            Log.d("QQQ", "программа дошла 3 KatId.kat= ${KatId.kat}")
         })
+
+
     }
+
+    override fun onAttach(context: Context) {
+        KatId.kat = 3
+        super.onAttach(context)
+    }
+
 
 
     companion object {
         @JvmStatic
-        fun newInstance() = MainFragment()
+        fun newInstance(param1: Int, param2: String) =
+            Cat2Fragment().apply {
+                arguments = Bundle().apply {
+                    putInt(ARG_IDD, param1)
+                    putString(ARG_IDD_NAME, param2)
+                }
+            }
     }
-
     override fun onDestroyView() {
         _binding = null
         super.onDestroyView()

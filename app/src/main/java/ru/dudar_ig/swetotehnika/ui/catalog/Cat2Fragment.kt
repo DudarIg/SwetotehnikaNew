@@ -1,6 +1,8 @@
 package ru.dudar_ig.swetotehnika.ui.catalog
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -19,7 +21,7 @@ private const val ARG_IDD = "param1"
 private const val ARG_IDD_NAME = "param2"
 
 class Cat2Fragment : Fragment(R.layout.fragment_kat) {
-    private var id: String? = null
+
     private var idName: String? = null
 
     private var _binding: FragmentKatBinding?  = null
@@ -43,16 +45,21 @@ class Cat2Fragment : Fragment(R.layout.fragment_kat) {
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
         binding.recyclerView.adapter = myAdapter
 
+        myAdapter.funListClick = {
+            val fragment1 = ListTovarFragment.newInstance(it.id!!.toInt(), it.name!!)
+            activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.fragment_container,
+                fragment1)?.addToBackStack(null)?.commit()
+        }
+
         cat2ViewModel.items?.observe(this, Observer {
+            KatId.kat = 2
             it ?: return@Observer
             myAdapter.updateAdapter(it)
+
+            Log.d("QQQ", "программа дошла 2 KatId.kat= ${KatId.kat}")
         })
 
 
-    }
-    override fun onResume() {
-        KatId.kat = 2
-        super.onResume()
     }
 
 
