@@ -3,6 +3,7 @@
     package="ru.dudar_ig.swetotehnika">
     <uses-permission android:name="android.permission.INTERNET" />
     <application
+        android:name=".SwetotehnikaApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
