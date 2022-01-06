@@ -26,11 +26,7 @@ tools:context=".ui.MainActivity">
             android:text="dsasdasdasdasdasd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
-
-
-
     </androidx.appcompat.widget.Toolbar>
-
 
     </com.google.android.material.appbar.AppBarLayout>
 <FrameLayout
@@ -41,11 +37,13 @@ tools:context=".ui.MainActivity">
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_nav"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:itemIconTint="@color/black"
         android:background="@color/yelow"
-        app:itemRippleColor="@color/design_default_color_error"
+        android:theme="@style/BottomNavThem"
+        app:itemIconSize="@dimen/h24"
+        app:itemIconTint="@color/black"
+        app:itemRippleColor="@color/background"
         app:itemTextColor="@color/black"
         app:labelVisibilityMode="labeled"
         app:menu="@menu/menu_nav" />
