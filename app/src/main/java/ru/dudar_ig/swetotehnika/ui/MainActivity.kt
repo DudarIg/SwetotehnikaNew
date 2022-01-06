@@ -9,6 +9,7 @@ import ru.dudar_ig.swetotehnika.ui.catalog.MainFragment
 import ru.dudar_ig.swetotehnika.R
 import ru.dudar_ig.swetotehnika.databinding.ActivityMainBinding
 
+
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
@@ -25,7 +26,7 @@ class MainActivity : AppCompatActivity() {
 
         val mainFragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
         if (mainFragment == null) {
-            binding.toolbar.title = "Светотехника"
+            binding.toolbarTitle.text = resources.getString(R.string.app_name)
             val fragment = OneFragment.newInstance()
             supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, fragment)
@@ -37,6 +38,11 @@ class MainActivity : AppCompatActivity() {
         (0..3).forEach {
             navLists[it].isClickable = if (it == iters)  false else true
         }
+        if (iters == -1) binding.toolbarTitle.text = resources.getString(R.string.app_name)
+    }
+
+    fun titleText(text: String) {
+        binding.toolbarTitle.text = text
     }
 
 
@@ -51,7 +57,7 @@ class MainActivity : AppCompatActivity() {
             val fragment : Fragment
             when (item.itemId) {
                 R.id.nav_catalog -> {
-                   binding.toolbar.title = "Каталог продкуции"
+                    binding.toolbarTitle.text = resources.getString(R.string.cat_name)
                     fragment = MainFragment.newInstance()
                     navClickable(0)
                 }

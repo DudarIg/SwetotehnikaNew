@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.Toolbar
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -44,7 +45,12 @@ class MainFragment : Fragment(R.layout.fragment_kat) {
             KatId.kat = 1
             it ?: return@Observer
             myAdapter.updateAdapter(it)
+            binding.pBar.isVisible = false
         })
+    }
+    override fun onStart() {
+        (activity as MainActivity).titleText(resources.getString(R.string.cat_name))
+        super.onStart()
     }
     override fun onAttach(context: Context) {
         KatId.kat = 1
