@@ -19,7 +19,7 @@
         android:paddingRight="5dp"
         android:singleLine="false"
         android:textAllCaps="false"
-        android:textColor="#085E45"
+        android:textColor="#071588"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/im2"
@@ -46,5 +46,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-
+<View
+    android:layout_width="match_parent"
+    android:layout_height="1dp"
+    android:layout_marginTop="2dp"
+    android:background="#7A7777"
+    app:layout_constraintBottom_toBottomOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
+

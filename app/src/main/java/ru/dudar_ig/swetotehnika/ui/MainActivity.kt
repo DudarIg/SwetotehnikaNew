@@ -21,20 +21,25 @@ class MainActivity : AppCompatActivity() {
 
         initBottomNav()
 
+
+
         val mainFragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
         if (mainFragment == null) {
-            val fragment = OneFragment.newInstance("null", "null")
+            binding.toolbar.title = "Светотехника"
+            val fragment = OneFragment.newInstance()
             supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, fragment)
                 .commit()
         }
     }
 
-    private fun navClickable(iters: Int) {
+    fun navClickable(iters: Int) {
         (0..3).forEach {
             navLists[it].isClickable = if (it == iters)  false else true
         }
     }
+
+
 
     private fun initBottomNav() {
         navLists.add(findViewById(R.id.nav_catalog))
@@ -46,9 +51,9 @@ class MainActivity : AppCompatActivity() {
             val fragment : Fragment
             when (item.itemId) {
                 R.id.nav_catalog -> {
-                    Toast.makeText(this, "Выбран каталог", Toast.LENGTH_SHORT).show()
+                   binding.toolbar.title = "Каталог продкуции"
                     fragment = MainFragment.newInstance()
-                    //navClickable(0)
+                    navClickable(0)
                 }
                 R.id.nav_zakaz -> {
                     Toast.makeText(this, "Выбран заказ", Toast.LENGTH_SHORT).show()
