@@ -3,34 +3,39 @@ package ru.dudar_ig.swetotehnika.ui.catalog
 import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import android.widget.EditText
+import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.chip.Chip
 import ru.dudar_ig.swetotehnika.KatId
 import ru.dudar_ig.swetotehnika.R
 import ru.dudar_ig.swetotehnika.adapter.MyAdapter
 import ru.dudar_ig.swetotehnika.data.ProductViewModel
-import ru.dudar_ig.swetotehnika.data.TovarsViewModel
 import ru.dudar_ig.swetotehnika.database.Product
 import ru.dudar_ig.swetotehnika.database.ProductDbRepo
-import ru.dudar_ig.swetotehnika.databinding.FragmentKatBinding
 import ru.dudar_ig.swetotehnika.databinding.FragmentProductBinding
 import ru.dudar_ig.swetotehnika.ui.MainActivity
 
 private const val ARG_IDD = "param1"
 private const val ARG_IDD_NAME = "param2"
 
-
 class ProductFragment : Fragment(R.layout.fragment_product) {
 
     private var idName: String? = null
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
+
+    private lateinit var zapChip : Chip
+    private lateinit var minusChip : Chip
+    private lateinit var plusChip : Chip
+    private lateinit var countEdit : EditText
+    val product = Product()
+    var count : Int = 1
+
 
     private var _binding: FragmentProductBinding?  = null
     private val binding get() = _binding!!
@@ -50,6 +55,11 @@ class ProductFragment : Fragment(R.layout.fragment_product) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentProductBinding.bind(view)
 
+        zapChip = view.findViewById(R.id.zap_chip)
+        minusChip = view.findViewById(R.id.minus_chip)
+        plusChip = view.findViewById(R.id.plus_chip)
+        countEdit = view.findViewById(R.id.editTextNumber)
+
         bottomSheetBehavior = BottomSheetBehavior.from(view.findViewById(R.id.bottom_sheet_container))
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
 
@@ -57,26 +67,40 @@ class ProductFragment : Fragment(R.layout.fragment_product) {
         binding.recyclerView.adapter = myAdapter
 
         myAdapter.funCartButtonClick = {
-            bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+            product.id = it.id!!.toInt()
+            product.name = it.name!!
+            product.count = count
+            product.price = it.price!!
 
-        //            val product = Product()
-//            product.id = it.id!!.toInt()
-//            product.name = it.name!!
-//            product.count = 1
-//            product.price = it.price!!
-//
-//            val productDbRepo = ProductDbRepo.get()
-//            productDbRepo.addProduct(product)
-           // requireActivity().onBackPressed()
+            bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
         }
 
+        minusChip.setOnClickListener {
+            count = countEdit.text.toString().toInt()
+            if (count > 1) count--
+            countEdit.setText(count.toString())
+        }
+        plusChip.setOnClickListener {
+            count = countEdit.text.toString().toInt()
+            count++
+            countEdit.setText(count.toString())
+        }
+
+        zapChip.setOnClickListener {
+            if (countEdit.text.toString().length > 0) {
+                val productDbRepo = ProductDbRepo.get()
+                product.count = countEdit.text.toString().toInt()
+                productDbRepo.addProduct(product)
+                Toast.makeText(context, "Товар успешно добавлен в заказ", Toast.LENGTH_SHORT).show()
+                requireActivity().onBackPressed()
+            }
+        }
 
         productViewModel.items?.observe(this, Observer {
             KatId.kat = 4
             it ?: return@Observer
             myAdapter.updateAdapter(it)
         })
-
     }
 
     override fun onStart() {
@@ -88,7 +112,6 @@ class ProductFragment : Fragment(R.layout.fragment_product) {
         KatId.kat = 4
         super.onAttach(context)
     }
-
 
     companion object {
         @JvmStatic
