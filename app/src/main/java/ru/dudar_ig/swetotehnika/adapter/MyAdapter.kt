@@ -5,6 +5,8 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -20,6 +22,8 @@ class MyAdapter(var listArray: ArrayList<Tovar>) : RecyclerView.Adapter<MyAdapte
     var funCatClick: ((Tovar) -> Unit)? = null
     var funListClick: ((Tovar) -> Unit)? = null
     var funProductClick: ((Tovar) -> Unit)? = null
+    var funCartButtonClick: ((Tovar) -> Unit)? = null
+    lateinit var cat : ImageButton
 
     class MyHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val iv = itemView
@@ -40,6 +44,7 @@ class MyAdapter(var listArray: ArrayList<Tovar>) : RecyclerView.Adapter<MyAdapte
                 tvProp.text= listBuk.prop
                 val tvImage : ImageView = iv.findViewById(R.id.im2)
                 tvImage.load(listBuk.foto)
+
             }
 
         }
@@ -69,6 +74,14 @@ class MyAdapter(var listArray: ArrayList<Tovar>) : RecyclerView.Adapter<MyAdapte
     // подключает данные с позиции массива к нарисованному шаблону
     override fun onBindViewHolder(holder: MyHolder, position: Int) {
         holder.setData(listArray.get(position))
+
+        if (KatId.kat == 4) {
+            val vv = listArray[position]
+            cat = holder.iv.findViewById(R.id.cart_button)
+            cat.setOnClickListener {
+                funCartButtonClick?.invoke(vv)
+            }
+        }
 
         // обработчик нажатия на строку RecyclerViev
         holder.iv.setOnClickListener {

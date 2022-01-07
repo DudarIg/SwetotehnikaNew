@@ -7,4 +7,7 @@
     <style name="BottomNavThem" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimaryRed</item>
     </style>
+    <style name="chip_color" parent="Widget.MaterialComponents.Chip.Action">
+        <item name="android:textColor">@color/white</item>
+    </style>
 </resources>

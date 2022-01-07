@@ -6,7 +6,7 @@ import androidx.room.Room
 import java.lang.IllegalStateException
 import java.util.concurrent.Executors
 
-private const val NAME_DATABASE = "product-db"
+private const val NAME_DATABASE = "films-database"
 
 class ProductDbRepo private constructor(context: Context){
 

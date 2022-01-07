@@ -15,4 +15,5 @@
     <string name="zakaz">Заказ</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Главная страница приложения</string>
+    <string name="cart">Заказать</string>
 </resources>
