@@ -21,6 +21,7 @@ import ru.dudar_ig.swetotehnika.database.ProductDbRepo
 import ru.dudar_ig.swetotehnika.databinding.FragmentProductBinding
 import ru.dudar_ig.swetotehnika.ui.MainActivity
 
+
 private const val ARG_IDD = "param1"
 private const val ARG_IDD_NAME = "param2"
 
