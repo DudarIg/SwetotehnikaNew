@@ -92,6 +92,7 @@ class ProductFragment : Fragment(R.layout.fragment_product) {
                 val productDbRepo = ProductDbRepo.get()
                 product.count = countEdit.text.toString().toInt()
                 productDbRepo.addProduct(product)
+                (activity as MainActivity).binding.bottomNav.getOrCreateBadge(R.id.nav_zakaz)
                 Toast.makeText(context, "Товар успешно добавлен в заказ", Toast.LENGTH_SHORT).show()
                 requireActivity().onBackPressed()
             }

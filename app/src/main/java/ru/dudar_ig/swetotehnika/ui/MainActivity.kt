@@ -12,7 +12,7 @@ import ru.dudar_ig.swetotehnika.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
+    lateinit var binding: ActivityMainBinding
     private var navLists = mutableListOf<View>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
