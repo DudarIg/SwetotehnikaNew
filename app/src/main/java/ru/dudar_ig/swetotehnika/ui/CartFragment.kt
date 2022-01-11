@@ -57,8 +57,13 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
         plusChip = view.findViewById(R.id.plus_chip)
         countEdit = view.findViewById(R.id.editTextNumber)
 
+
         bottomSheetBehavior = BottomSheetBehavior.from(view.findViewById(R.id.bottom_sheet_container))
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+
+        cartAdapter.funItogClick= {
+            Toast.makeText(context, "Выполнение отправки данных", Toast.LENGTH_SHORT).show()
+        }
 
         cartAdapter.funDelClick = {
             val productDbRepo = ProductDbRepo.get()
