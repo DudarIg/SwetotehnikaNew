@@ -48,7 +48,17 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
         productsCartVM.listProd.observe(this, Observer {
             it ?: return@Observer
             cartAdapter.updateAdapter(it)
-            binding.zeroTv.isVisible = if (cartAdapter.itemCount == 0)  true else false
+            if (cartAdapter.itemCount == 0) {
+                binding.zeroTv.isVisible = true
+                (activity as MainActivity).binding.bottomNav.removeBadge(R.id.nav_zakaz)
+            } else {
+                binding.zeroTv.isVisible = false
+                (activity as MainActivity).binding.bottomNav.getOrCreateBadge(R.id.nav_zakaz)
+
+            }
+
+
+
         })
 
     }
