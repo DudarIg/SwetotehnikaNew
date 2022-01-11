@@ -8,6 +8,7 @@
         <item name="colorPrimary">@color/colorPrimaryRed</item>
     </style>
     <style name="chip_color" parent="Widget.MaterialComponents.Chip.Action">
-        <item name="android:textColor">@color/white</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="chipIconTint">@color/colorPrimaryRed</item>
     </style>
 </resources>

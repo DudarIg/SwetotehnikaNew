@@ -62,8 +62,7 @@ class MainActivity : AppCompatActivity() {
                     navClickable(0)
                 }
                 R.id.nav_zakaz -> {
-                    Toast.makeText(this, "Выбран заказ", Toast.LENGTH_SHORT).show()
-                    fragment = MainFragment.newInstance()
+                    fragment = CartFragment.newInstance("Ваш заказ:")
                    navClickable(1)
                 }
                 R.id.nav_price -> {
