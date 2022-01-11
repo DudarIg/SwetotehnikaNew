@@ -22,7 +22,7 @@ class ListTovarFragment : Fragment(R.layout.fragment_kat) {
 
     private var idName: String? = null
 
-    private var _binding: FragmentKatBinding?  = null
+    private var _binding: FragmentKatBinding? = null
     private val binding get() = _binding!!
 
     private val myAdapter = MyAdapter(ArrayList())
@@ -45,7 +45,8 @@ class ListTovarFragment : Fragment(R.layout.fragment_kat) {
 
         myAdapter.funProductClick = {
             val fragment = ProductFragment.newInstance(it.id!!.toInt(), it.name!!)
-            activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.fragment_container,
+            activity?.supportFragmentManager?.beginTransaction()?.replace(
+                R.id.fragment_container,
                 fragment)?.addToBackStack(null)?.commit()
         }
 
@@ -62,6 +63,7 @@ class ListTovarFragment : Fragment(R.layout.fragment_kat) {
         KatId.kat = 3
         super.onAttach(context)
     }
+
     override fun onStart() {
         (activity as MainActivity).titleText(idName!!)
         super.onStart()
@@ -77,6 +79,7 @@ class ListTovarFragment : Fragment(R.layout.fragment_kat) {
                 }
             }
     }
+
     override fun onDestroyView() {
         _binding = null
         super.onDestroyView()

@@ -4,9 +4,15 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import ru.dudar_ig.swetotehnika.ui.catalog.MainFragment
 import ru.dudar_ig.swetotehnika.R
+import ru.dudar_ig.swetotehnika.adapter.CartAdapter
+import ru.dudar_ig.swetotehnika.database.CartCountVM
+import ru.dudar_ig.swetotehnika.database.ProductsCartViewModel
 import ru.dudar_ig.swetotehnika.databinding.ActivityMainBinding
 
 
@@ -15,14 +21,14 @@ class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
     private var navLists = mutableListOf<View>()
 
+    private val cartCounts by viewModels<CartCountVM>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         initBottomNav()
-
-
 
         val mainFragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
         if (mainFragment == null) {
@@ -45,13 +51,13 @@ class MainActivity : AppCompatActivity() {
         binding.toolbarTitle.text = text
     }
 
-
-
     private fun initBottomNav() {
         navLists.add(findViewById(R.id.nav_catalog))
         navLists.add(findViewById(R.id.nav_zakaz))
         navLists.add(findViewById(R.id.nav_price))
         navLists.add(findViewById(R.id.nav_contact))
+
+
 
         binding.bottomNav.setOnItemSelectedListener { item ->
             val fragment : Fragment
@@ -87,5 +93,22 @@ class MainActivity : AppCompatActivity() {
 
             true
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        cartCounts.cartCount.observe(this, Observer {
+            Toast.makeText(this, "Продукции в заказе: $it", Toast.LENGTH_SHORT).show()
+            if (it == 0) {
+                binding.bottomNav.removeBadge(R.id.nav_zakaz)
+            } else {
+                binding.bottomNav.getOrCreateBadge(R.id.nav_zakaz)
+            }
+        })
+
+
+
+
+
     }
 }

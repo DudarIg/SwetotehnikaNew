@@ -6,8 +6,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.activity.viewModels
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import ru.dudar_ig.swetotehnika.R
 import ru.dudar_ig.swetotehnika.data.Tovar
+import ru.dudar_ig.swetotehnika.database.CartCountVM
 
 
 class OneFragment : Fragment() {
@@ -24,6 +29,11 @@ class OneFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_one, container, false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+
+    }
     companion object {
         @JvmStatic
         fun newInstance() = OneFragment()

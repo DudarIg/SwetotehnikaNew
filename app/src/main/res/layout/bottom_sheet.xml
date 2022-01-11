@@ -37,11 +37,12 @@
         android:ems="1"
         android:inputType="number"
         android:text="1"
+        android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@id/plus_chip"
         app:layout_constraintStart_toEndOf="@+id/minus_chip"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/plus_chip"
         tools:ignore="TouchTargetSizeCheck" />
 
     <com.google.android.material.chip.Chip

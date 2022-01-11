@@ -1,10 +1,7 @@
 package ru.dudar_ig.swetotehnika.database
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 
 @Dao
 interface ProductDao {
@@ -15,8 +12,14 @@ interface ProductDao {
         @Query("SELECT * FROM cartitems WHERE id=(:id)")
         fun getProduct(id: Int): LiveData<Product?>
 
+        @Query("SELECT COUNT() AS KOL FROM cartitems")
+        fun getCount(): LiveData<Int>
+
         @Insert
         fun addProduct(product: Product)
+
+        @Update
+        fun updateProduct(product: Product)
 
         @Delete
         fun delProduct(product: Product)

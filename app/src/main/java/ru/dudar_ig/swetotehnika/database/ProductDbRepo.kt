@@ -21,6 +21,7 @@ class ProductDbRepo private constructor(context: Context){
 
     fun getProducts(): LiveData<List<Product>> = productDao.getProducts()
     fun getProduct(id: Int): LiveData<Product?> = productDao.getProduct(id)
+    fun getCount(): LiveData<Int> = productDao.getCount()
 
     fun addProduct(product: Product) {
         executor.execute{
@@ -31,6 +32,12 @@ class ProductDbRepo private constructor(context: Context){
     fun delProduct(product: Product) {
         executor.execute{
             productDao.delProduct(product)
+        }
+    }
+
+    fun updateProduct(product: Product) {
+        executor.execute{
+            productDao.updateProduct(product)
         }
     }
 

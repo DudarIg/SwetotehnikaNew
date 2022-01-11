@@ -29,10 +29,10 @@ class CartAdapter( var listProd: ArrayList<Product>):
 
         fun setData(product: Product) {
             nameTv.text = product.name
-            priceTv.text = product.price
+            priceTv.text = "${product.price} ₽"
             countTv.text = product.count.toString()
             val summa = product.price.toFloat() * product.count
-            summaTv.text = String.format("%.2f", summa)
+            summaTv.text = String.format("%.2f", summa)+" ₽"
 
         }
     }
@@ -50,16 +50,10 @@ class CartAdapter( var listProd: ArrayList<Product>):
         holder.delIb.setOnClickListener {
             funDelClick?.invoke(product)
         }
+        holder.editIb.setOnClickListener {
+            funEditClick?.invoke(product)
+        }
 
-//        holder.itemView.setOnClickListener {
-//            if (holder.viv.isChecked) {
-//                holder.viv.isChecked = false
-//                ganr.viv = false
-//            }
-//            else {
-//                holder.viv.isChecked = true
-//                ganr.viv = true}
-//        }
 
     }
 

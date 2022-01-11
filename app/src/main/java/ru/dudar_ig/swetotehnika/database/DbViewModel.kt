@@ -13,6 +13,15 @@ class ProductsCartViewModel: ViewModel() {
     }
 }
 
+class CartCountVM: ViewModel() {
+    private val productDbRepo: ProductDbRepo
+    var cartCount : LiveData<Int>
+    init {
+        productDbRepo = ProductDbRepo.get()
+        cartCount = productDbRepo.getCount()
+    }
+}
+
 class ProductCartViewModel: ViewModel() {
     private val productDbRepo: ProductDbRepo
     var product: LiveData<Product?>
