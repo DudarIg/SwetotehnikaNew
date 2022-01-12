@@ -4,19 +4,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.chip.Chip
 import ru.dudar_ig.swetotehnika.R
 import ru.dudar_ig.swetotehnika.database.Product
-import ru.dudar_ig.swetotehnika.ui.MainActivity
-import java.lang.RuntimeException
-import kotlin.coroutines.coroutineContext
 
 class CartAdapter( var listProd: ArrayList<Product>):
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-
-
 
     var funDelClick: ((Product) -> Unit)? = null
     var funEditClick: ((Product) -> Unit)? = null
@@ -37,15 +31,12 @@ class CartAdapter( var listProd: ArrayList<Product>):
             countTv.text = product.count.toString()
             val summa = product.price.toFloat() * product.count
             summaTv.text = String.format("%.2f", summa)+" ₽"
-
         }
     }
 
     class ItogHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val emailChip: Chip = itemView.findViewById(R.id.email_chip)
     }
-
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -73,19 +64,11 @@ class CartAdapter( var listProd: ArrayList<Product>):
             holder.emailChip.setOnClickListener {
                 funItogClick?.invoke(listProd)
             }
-
         }
-
-
     }
 
     override fun getItemViewType(position: Int): Int {
-        return if (position + 1 != listProd.size) {
-            TOVAR
-        } else {
-            ITOG
-        }
-
+        return if (position + 1 != listProd.size) TOVAR else ITOG
     }
 
     override fun getItemCount(): Int {
@@ -98,9 +81,9 @@ class CartAdapter( var listProd: ArrayList<Product>):
         if (listProd.size > 0 ) {
             listProd.add(Product())
         }
-
         notifyDataSetChanged()
     }
+
     companion object {
         const val TOVAR = 100
         const val ITOG = 101
