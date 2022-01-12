@@ -11,10 +11,11 @@ import ru.dudar_ig.swetotehnika.database.Product
 
 class CartAdapter( var listProd: ArrayList<Product>):
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-
+    var allSumma = 0f
     var funDelClick: ((Product) -> Unit)? = null
     var funEditClick: ((Product) -> Unit)? = null
     var funItogClick: ((ArrayList<Product>) -> Unit)? = null
+
 
     class TovarHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
 
@@ -25,17 +26,24 @@ class CartAdapter( var listProd: ArrayList<Product>):
         val editIb: Chip = itemView.findViewById(R.id.edit_ib)
         val delIb: Chip = itemView.findViewById(R.id.del_ib)
 
-        fun setData(product: Product) {
+
+        fun setData(product: Product): Float {
             nameTv.text = product.name
             priceTv.text = "${product.price} ₽"
             countTv.text = product.count.toString()
             val summa = product.price.toFloat() * product.count
+            //allSumma = allSumma + summa
             summaTv.text = String.format("%.2f", summa)+" ₽"
+            return summa
         }
     }
 
     class ItogHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val emailChip: Chip = itemView.findViewById(R.id.email_chip)
+        val summaTv :TextView = itemView.findViewById(R.id.summa_tv)
+        fun setSumma(allsumma: Float) {
+            summaTv.text = String.format("%.2f", allsumma)+" ₽"
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -51,7 +59,7 @@ class CartAdapter( var listProd: ArrayList<Product>):
         val product = listProd[position]
         if (getItemViewType(position) == TOVAR) {
             holder as TovarHolder
-            holder.setData(product)
+            allSumma = allSumma + holder.setData(product)
             holder.delIb.setOnClickListener {
                 funDelClick?.invoke(product)
             }
@@ -61,6 +69,7 @@ class CartAdapter( var listProd: ArrayList<Product>):
         }
         if (getItemViewType(position) == ITOG) {
             holder as ItogHolder
+            holder.setSumma(allSumma)
             holder.emailChip.setOnClickListener {
                 funItogClick?.invoke(listProd)
             }

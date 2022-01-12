@@ -37,7 +37,6 @@ class ProductFragment : Fragment(R.layout.fragment_product) {
     val product = Product()
     var count : Int = 1
 
-
     private var _binding: FragmentProductBinding?  = null
     private val binding get() = _binding!!
 

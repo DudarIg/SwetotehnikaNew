@@ -33,6 +33,7 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
     private lateinit var countEdit : EditText
     private val product = Product()
     private var count = 1
+    private var mailMessage: String = ""
 
     private var _binding: FragmentCartBinding? = null
     private val binding get() = _binding!!
@@ -64,8 +65,18 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
 
         cartAdapter.funItogClick= {
-            //Toast.makeText(context, "Выполнение отправки данных", Toast.LENGTH_SHORT).show()
+            val productDbRepo = ProductDbRepo.get()
+            mailMessage = "Заказ товара:\n"
+            it.forEach { product ->
+                if (product.id > 0)
+                mailMessage = mailMessage + "Код: ${product.id} : ${product.name}, кол-во: ${product.count}\n"
+                productDbRepo.delProduct(product)
+            }
             sendEmail()
+            mailMessage = ""
+            //Toast.makeText(context, "Заказ отправлен", Toast.LENGTH_SHORT).show()
+            requireActivity().onBackPressed()
+
         }
 
         cartAdapter.funDelClick = {
@@ -123,32 +134,18 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
     }
 
     private fun sendEmail() {
-        /*ACTION_SEND action to launch an email client installed on your Android device.*/
         val mIntent = Intent(Intent.ACTION_SEND)
-        /*To send an email you need to specify mailto: as URI using setData() method
-        and data type will be to text/plain using setType() method*/
         mIntent.data = Uri.parse("mailto:")
         mIntent.type = "text/plain"
-        // put recipient email in intent
-        /* recipient is put as array because you may wanna send email to multiple emails
-           so enter comma(,) separated emails, it will be stored in array*/
-        mIntent.putExtra(Intent.EXTRA_EMAIL, arrayOf("pakad@mail.ru"))
-        //put the Subject in the intent
-        mIntent.putExtra(Intent.EXTRA_SUBJECT, "Заказ товара")
-        //put the message in the intent
-        mIntent.putExtra(Intent.EXTRA_TEXT, "Заказ товара с мобильного приложения")
-
-
+        mIntent.putExtra(Intent.EXTRA_EMAIL, arrayOf("pakad@mail.ru", "kulakov@swetotehnika.ru"))
+        mIntent.putExtra(Intent.EXTRA_SUBJECT, "Заказ товара - TECT")
+        mIntent.putExtra(Intent.EXTRA_TEXT, mailMessage)
         try {
-            //start email intent
             startActivity(Intent.createChooser(mIntent, "Выберите почтовый клиент..."))
         }
         catch (e: Exception){
-            //if any thing goes wrong for example no email client application or any exception
-            //get and show exception message
             Toast.makeText(context, e.message, Toast.LENGTH_LONG).show()
         }
-
     }
 
     override fun onStart() {

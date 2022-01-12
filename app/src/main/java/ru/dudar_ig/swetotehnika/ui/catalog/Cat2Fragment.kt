@@ -2,12 +2,9 @@ package ru.dudar_ig.swetotehnika.ui.catalog
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,7 +12,6 @@ import ru.dudar_ig.swetotehnika.KatId
 import ru.dudar_ig.swetotehnika.R
 import ru.dudar_ig.swetotehnika.adapter.MyAdapter
 import ru.dudar_ig.swetotehnika.data.Cat2ViewModel
-import ru.dudar_ig.swetotehnika.data.CatViewModel
 import ru.dudar_ig.swetotehnika.databinding.FragmentKatBinding
 import ru.dudar_ig.swetotehnika.ui.MainActivity
 
@@ -59,8 +55,6 @@ class Cat2Fragment : Fragment(R.layout.fragment_kat) {
             myAdapter.updateAdapter(it)
             binding.pBar.isVisible = false
         })
-
-
     }
 
     override fun onAttach(context: Context) {
@@ -72,7 +66,6 @@ class Cat2Fragment : Fragment(R.layout.fragment_kat) {
         (activity as MainActivity).titleText(idName!!)
         super.onStart()
     }
-
 
     companion object {
         @JvmStatic
