@@ -1,11 +1,8 @@
 package ru.dudar_ig.swetotehnika.adapter
 
-import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
@@ -17,8 +14,7 @@ import ru.dudar_ig.swetotehnika.data.Tovar
 
 
 class MyAdapter(var listArray: ArrayList<Tovar>) : RecyclerView.Adapter<MyAdapter.MyHolder>() {
-//    var listArray = listMain
-//    var context = contextM
+
     var funCatClick: ((Tovar) -> Unit)? = null
     var funListClick: ((Tovar) -> Unit)? = null
     var funProductClick: ((Tovar) -> Unit)? = null
@@ -94,20 +90,7 @@ class MyAdapter(var listArray: ArrayList<Tovar>) : RecyclerView.Adapter<MyAdapte
             if (KatId.kat == 3) {
                 funProductClick?.invoke(listArray.get(position))
             }
-//                if (KatId.kat == 2) {
-//                    val intent = Intent(context, MainActivity3::class.java).apply {
-//                        putExtra("idd", listBuk.id)
-//                        putExtra("idd_name", listBuk.name)
-//                    }
-//                    context.startActivity(intent)
-//                }
-//                if (KatId.kat == 3) {
-//                    val intent = Intent(context, MainActivityOne::class.java).apply {
-//                        putExtra("idd", listBuk.id)
-//                        putExtra("idd_name", listBuk.name)
-//                    }
-//                    context.startActivity(intent)
-//                }
+
         }
 
 

@@ -1,6 +1,9 @@
 package ru.dudar_ig.swetotehnika.ui
 
 import android.os.Bundle
+import android.transition.Slide
+import android.transition.TransitionManager
+import android.view.Gravity
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -16,8 +19,8 @@ import ru.dudar_ig.swetotehnika.ui.catalog.MainFragment
 class MainActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityMainBinding
+    private var searchIsVisible = false
     private var navLists = mutableListOf<View>()
-
     private val cartCounts by viewModels<CartCountVM>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,6 +29,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         initBottomNav()
+
+        binding.imageView.setOnClickListener {
+            TransitionManager.beginDelayedTransition(binding.transmis, Slide(Gravity.TOP))
+            searchIsVisible = !searchIsVisible
+            binding.searchLayout.visibility = if (searchIsVisible) View.VISIBLE else View.GONE
+        }
 
         val mainFragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
         if (mainFragment == null) {
