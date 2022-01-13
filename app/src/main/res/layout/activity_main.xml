@@ -5,7 +5,6 @@ xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
 android:orientation="vertical"
-android:id="@+id/transmis"
 tools:context=".ui.MainActivity">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -51,27 +50,34 @@ tools:context=".ui.MainActivity">
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/search_layout"
-        android:visibility="gone"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:hint="Поиск по каталогу"
-        app:counterEnabled="true"
-        app:counterMaxLength="40"
-        app:endIconCheckable="true"
-        app:endIconDrawable="@drawable/ic_search"
-        app:endIconMode="clear_text"
-        app:boxCollapsedPaddingTop="50dp">
+        android:id="@+id/transmis">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/input_text"
-            android:inputType="text"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/search_layout"
+            android:visibility="gone"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:hint="Поиск по каталогу"
+            app:counterEnabled="true"
+            app:counterMaxLength="40"
+            app:endIconCheckable="true"
+            app:endIconDrawable="@drawable/ic_search"
+            app:endIconMode="custom"
+            app:boxCollapsedPaddingTop="50dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/input_text"
+                android:inputType="text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </FrameLayout>
 
     <FrameLayout
     android:id="@+id/fragment_container"
