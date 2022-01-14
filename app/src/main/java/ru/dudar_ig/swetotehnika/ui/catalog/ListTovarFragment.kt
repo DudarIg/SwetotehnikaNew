@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import ru.dudar_ig.swetotehnika.KatId
 import ru.dudar_ig.swetotehnika.R
 import ru.dudar_ig.swetotehnika.adapter.MyAdapter
+import ru.dudar_ig.swetotehnika.data.SearchViewModel
 import ru.dudar_ig.swetotehnika.data.TovarsViewModel
 import ru.dudar_ig.swetotehnika.databinding.FragmentKatBinding
 import ru.dudar_ig.swetotehnika.ui.MainActivity
@@ -27,6 +28,8 @@ class ListTovarFragment : Fragment(R.layout.fragment_kat) {
 
     private val myAdapter = MyAdapter(ArrayList())
     private val tovarsViewModel by viewModels<TovarsViewModel>()
+    private val searchViewModel by viewModels<SearchViewModel>()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,12 +53,22 @@ class ListTovarFragment : Fragment(R.layout.fragment_kat) {
                 fragment)?.addToBackStack(null)?.commit()
         }
 
-        tovarsViewModel.items?.observe(this, Observer {
-            KatId.kat = 3
-            it ?: return@Observer
-            myAdapter.updateAdapter(it)
-            binding.pBar.isVisible = false
-        })
+        if (KatId.id != 0 && KatId.search == "") {
+            tovarsViewModel.items?.observe(this, Observer {
+                KatId.kat = 3
+                it ?: return@Observer
+                myAdapter.updateAdapter(it)
+                binding.pBar.isVisible = false
+            })
+        } else {
+            searchViewModel.items?.observe(this, Observer {
+                KatId.kat = 3
+                it ?: return@Observer
+                myAdapter.updateAdapter(it)
+                binding.pBar.isVisible = false
+            })
+
+        }
 
     }
 

@@ -1,18 +1,22 @@
 package ru.dudar_ig.swetotehnika.ui
 
+import android.content.Context
 import android.os.Bundle
 import android.transition.Slide
 import android.transition.TransitionManager
 import android.view.Gravity
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import ru.dudar_ig.swetotehnika.KatId
 import ru.dudar_ig.swetotehnika.R
 import ru.dudar_ig.swetotehnika.database.CartCountVM
 import ru.dudar_ig.swetotehnika.databinding.ActivityMainBinding
+import ru.dudar_ig.swetotehnika.ui.catalog.ListTovarFragment
 import ru.dudar_ig.swetotehnika.ui.catalog.MainFragment
 
 
@@ -35,6 +39,21 @@ class MainActivity : AppCompatActivity() {
             searchIsVisible = !searchIsVisible
             binding.searchLayout.visibility = if (searchIsVisible) View.VISIBLE else View.GONE
         }
+
+        binding.searchLayout.setEndIconOnClickListener {
+
+            closeKeyboard()
+
+            TransitionManager.beginDelayedTransition(binding.transmis, Slide(Gravity.TOP))
+            searchIsVisible = !searchIsVisible
+            binding.searchLayout.visibility = if (searchIsVisible) View.VISIBLE else View.GONE
+
+            KatId.search = binding.inputText.text.toString().trim()
+            val fragment = ListTovarFragment.newInstance(0, "Поиск: <${KatId.search}>")
+            supportFragmentManager?.beginTransaction()?.replace(R.id.fragment_container,
+                fragment)?.addToBackStack(null)?.commit()
+        }
+
 
         val mainFragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
         if (mainFragment == null) {
@@ -96,6 +115,14 @@ class MainActivity : AppCompatActivity() {
                 .commit()
 
             true
+        }
+    }
+
+    fun closeKeyboard() {
+        val view = this.currentFocus
+        if (view != null) {
+            val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0)
         }
     }
 

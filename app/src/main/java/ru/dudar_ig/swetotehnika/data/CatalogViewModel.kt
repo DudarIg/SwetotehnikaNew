@@ -25,6 +25,13 @@ class TovarsViewModel: ViewModel() {
     }
 }
 
+class SearchViewModel: ViewModel() {
+    val items : LiveData<List<Tovar>>?
+    init {
+        items = CatalogApiImpl.loadListSearch(KatId.search)
+    }
+}
+
 class ProductViewModel: ViewModel() {
     val items : LiveData<List<Tovar>>?
     init {

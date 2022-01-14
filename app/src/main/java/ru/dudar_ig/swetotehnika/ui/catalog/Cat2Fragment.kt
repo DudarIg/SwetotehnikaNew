@@ -44,6 +44,7 @@ class Cat2Fragment : Fragment(R.layout.fragment_kat) {
         binding.recyclerView.adapter = myAdapter
 
         myAdapter.funListClick = {
+            KatId.search = ""
             val fragment = ListTovarFragment.newInstance(it.id!!.toInt(), it.name!!)
             activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.fragment_container,
                 fragment)?.addToBackStack(null)?.commit()

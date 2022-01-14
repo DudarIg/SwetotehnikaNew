@@ -23,6 +23,9 @@ interface CatalogApi {
     @GET("/api/product/read_one.php")
     fun getProduct(@Query("n") idd:Int): Call<ApiCatalog>
 
+    @GET("/api/product/search.php")
+    fun getListSearch(@Query("s") word:String): Call<ApiCatalog>
+
 }
 
 object CatalogApiImpl {
@@ -95,6 +98,30 @@ object CatalogApiImpl {
         })
         return responseLiveData
     }
+
+    fun loadListSearch(word: String): LiveData<List<Tovar>> {
+        val responseLiveData: MutableLiveData<List<Tovar>> = MutableLiveData()
+        apiService.getListSearch(word).enqueue(object : Callback<ApiCatalog> {
+            override fun onResponse(call: Call<ApiCatalog>, response: Response<ApiCatalog>) {
+                val jsonCatalog: ApiCatalog? = response.body()
+                val catList = mutableListOf<Tovar>()
+                jsonCatalog?.results?.forEach {
+                    val tovar = Tovar()
+                    tovar.id = it.id
+                    tovar.name = it.name
+                    tovar.foto = it.foto
+                    tovar.price = it.price
+                    catList.add(tovar)
+                }
+                responseLiveData.postValue(catList)
+            }
+            override fun onFailure(call: Call<ApiCatalog>, t: Throwable) {
+                TODO("Not yet implemented")
+            }
+        })
+        return responseLiveData
+    }
+
     fun loadProduct(id: Int): LiveData<List<Tovar>> {
         val responseLiveData: MutableLiveData<List<Tovar>> = MutableLiveData()
         apiService.getProduct(id).enqueue(object : Callback<ApiCatalog> {
