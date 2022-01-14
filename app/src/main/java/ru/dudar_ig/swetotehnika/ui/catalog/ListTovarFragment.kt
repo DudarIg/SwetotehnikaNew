@@ -55,6 +55,7 @@ class ListTovarFragment : Fragment(R.layout.fragment_kat) {
 
         if (KatId.id != 0 && KatId.search == "") {
             tovarsViewModel.items?.observe(this, Observer {
+                binding.searchZero.isVisible = false
                 KatId.kat = 3
                 it ?: return@Observer
                 myAdapter.updateAdapter(it)
@@ -66,6 +67,9 @@ class ListTovarFragment : Fragment(R.layout.fragment_kat) {
                 it ?: return@Observer
                 myAdapter.updateAdapter(it)
                 binding.pBar.isVisible = false
+                if (myAdapter.listArray.size == 0) {
+                    binding.searchZero.isVisible = true
+                }
             })
 
         }

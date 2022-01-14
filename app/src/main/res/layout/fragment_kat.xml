@@ -22,4 +22,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/recycler_view" />
+    <TextView
+        android:id="@+id/search_zero"
+        android:visibility="gone"
+        android:gravity="center"
+        android:textSize="@dimen/zero"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="По запросу ничего не найдено" />
 </androidx.constraintlayout.widget.ConstraintLayout>

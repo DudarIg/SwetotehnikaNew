@@ -44,9 +44,9 @@ class MainActivity : AppCompatActivity() {
 
             closeKeyboard()
 
-            TransitionManager.beginDelayedTransition(binding.transmis, Slide(Gravity.TOP))
-            searchIsVisible = !searchIsVisible
-            binding.searchLayout.visibility = if (searchIsVisible) View.VISIBLE else View.GONE
+//            TransitionManager.beginDelayedTransition(binding.transmis, Slide(Gravity.TOP))
+//            searchIsVisible = !searchIsVisible
+//            binding.searchLayout.visibility = if (searchIsVisible) View.VISIBLE else View.GONE
 
             KatId.search = binding.inputText.text.toString().trim()
             val fragment = ListTovarFragment.newInstance(0, "Поиск: <${KatId.search}>")

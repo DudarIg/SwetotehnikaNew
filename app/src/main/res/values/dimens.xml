@@ -2,4 +2,5 @@
 <resources>
     <dimen name="title_size">18sp</dimen>
     <dimen name="h24">24dp</dimen>
+    <dimen name="zero">18sp</dimen>
 </resources>
