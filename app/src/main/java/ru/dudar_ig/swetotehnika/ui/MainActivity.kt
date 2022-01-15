@@ -48,12 +48,16 @@ class MainActivity : AppCompatActivity() {
 //            searchIsVisible = !searchIsVisible
 //            binding.searchLayout.visibility = if (searchIsVisible) View.VISIBLE else View.GONE
 
-            KatId.search = binding.inputText.text.toString().trim()
+            val searchOld = binding.inputText.text.toString().trim()
+            KatId.search = searchOld.replace(
+                ' ', // old char
+                '_', // new char
+                true // ignore case Boolean = false
+            )
             val fragment = ListTovarFragment.newInstance(0, "Поиск: <${KatId.search}>")
             supportFragmentManager?.beginTransaction()?.replace(R.id.fragment_container,
                 fragment)?.addToBackStack(null)?.commit()
         }
-
 
         val mainFragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
         if (mainFragment == null) {
