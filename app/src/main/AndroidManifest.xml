@@ -13,6 +13,7 @@
         <activity
             android:name=".ui.MainActivity"
             android:windowSoftInputMode="stateHidden|adjustResize"
+            android:theme="@style/Theme.Swetotehnika.Splash"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
