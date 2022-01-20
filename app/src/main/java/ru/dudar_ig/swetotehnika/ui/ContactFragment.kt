@@ -58,6 +58,11 @@ class ContactFragment : Fragment() {
         bottomSheetBehavior = BottomSheetBehavior.from(view.findViewById(R.id.bottom_sheet_contact))
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
 
+//        if (ContextCompat.checkSelfPermission(context!!, Manifest.permission.ACCESS_FINE_LOCATION )
+//            != PERMISSION_GRANTED ) {
+//            requestPermissions(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), REQUEST)
+//        }
+
         mapYandex = view.findViewById(R.id.yandex_map)
         mapYandex.getMap().move(
             CameraPosition(Point(55.898922, 37.379034), 16.0f, 0.0f, 1.0f),
@@ -71,9 +76,8 @@ class ContactFragment : Fragment() {
         email.setOnClickListener {
             sendEmail()
         }
-
         tel.setOnClickListener {
-            telCall("+79670588715")
+           telCall("+79670588715")
         }
         tel1.setOnClickListener {
             telCall("+79032352324")
@@ -96,7 +100,6 @@ class ContactFragment : Fragment() {
     }
 
     private fun telCall(telefon: String) {
-
         val intent = Intent(Intent.ACTION_CALL)
         intent.data = Uri.parse("tel:$telefon")
 
