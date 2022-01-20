@@ -61,7 +61,7 @@
         tools:ignore="MissingConstraints" />
 
     <com.google.android.material.chip.Chip
-        android:id="@+id/zap_chip"
+        android:id="@+id/email1_chip"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"

@@ -15,8 +15,8 @@ tools:context=".ui.MainActivity">
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/side_nav_bar"
-            app:navigationIcon="@mipmap/ic_launcher_foreground"
+
+            app:navigationIcon="@drawable/f0"
             app:titleTextColor="@color/yelow">
 
             <LinearLayout

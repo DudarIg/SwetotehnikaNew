@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="ru.dudar_ig.swetotehnika">
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+
     <application
         android:name=".SwetotehnikaApp"
         android:allowBackup="true"
@@ -12,9 +16,9 @@
         android:theme="@style/Theme.Swetotehnika">
         <activity
             android:name=".ui.MainActivity"
-            android:windowSoftInputMode="stateHidden|adjustResize"
+            android:exported="true"
             android:theme="@style/Theme.Swetotehnika.Splash"
-            android:exported="true">
+            android:windowSoftInputMode="stateHidden|adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

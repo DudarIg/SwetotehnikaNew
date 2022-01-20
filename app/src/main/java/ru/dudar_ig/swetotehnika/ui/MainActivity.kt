@@ -1,6 +1,7 @@
 package ru.dudar_ig.swetotehnika.ui
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.transition.Slide
 import android.transition.TransitionManager
@@ -12,6 +13,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import com.yandex.mapkit.MapKitFactory
 import ru.dudar_ig.swetotehnika.KatId
 import ru.dudar_ig.swetotehnika.R
 import ru.dudar_ig.swetotehnika.database.CartCountVM
@@ -28,8 +30,9 @@ class MainActivity : AppCompatActivity() {
     private val cartCounts by viewModels<CartCountVM>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        Thread.sleep(3_000)
+        Thread.sleep(2_000)
         setTheme(R.style.Theme_Swetotehnika)
+
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -92,36 +95,47 @@ class MainActivity : AppCompatActivity() {
             val fragment : Fragment
             when (item.itemId) {
                 R.id.nav_catalog -> {
+                    navClickable(0)
                     binding.toolbarTitle.text = resources.getString(R.string.cat_name)
                     fragment = MainFragment.newInstance()
-                    navClickable(0)
+                    startFragment(fragment)
                 }
                 R.id.nav_zakaz -> {
+                    navClickable(1)
                     fragment = CartFragment.newInstance("Ваш заказ:")
-                   navClickable(1)
+                    startFragment(fragment)
                 }
                 R.id.nav_price -> {
+                    navClickable(2)
                     Toast.makeText(this, "Выбран прайс", Toast.LENGTH_SHORT).show()
                     fragment = MainFragment.newInstance()
-                    navClickable(2)
+                    startFragment(fragment)
                 }
                 R.id.nav_contact -> {
-                    Toast.makeText(this, "Выбран контакт", Toast.LENGTH_SHORT).show()
-                    fragment = MainFragment.newInstance()
+                //    Toast.makeText(this, "Выбран контакт", Toast.LENGTH_SHORT).show()
                     navClickable(3)
+                    fragment = ContactFragment.newInstance("Контакты")
+                    startFragment(fragment)
+//                    val intent = Intent(this, ContactActivity::class.java)
+//                    startActivity(intent)
+
                 }
                 else -> {
                     fragment = MainFragment.newInstance()
+                    startFragment(fragment)
                 }
             }
-            supportFragmentManager.popBackStack()
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, fragment)
-                .addToBackStack(null)
-                .commit()
 
             true
         }
+    }
+
+    fun startFragment(f: Fragment) {
+        supportFragmentManager.popBackStack()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, f)
+            .addToBackStack(null)
+            .commit()
     }
 
     fun closeKeyboard() {
@@ -143,4 +157,6 @@ class MainActivity : AppCompatActivity() {
             }
         })
     }
+
+
 }

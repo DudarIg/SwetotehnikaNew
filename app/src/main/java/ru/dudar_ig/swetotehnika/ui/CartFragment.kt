@@ -55,7 +55,7 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
         binding.recyclerCart.layoutManager = LinearLayoutManager(context)
         binding.recyclerCart.adapter = cartAdapter
 
-        zapChip = view.findViewById(R.id.zap_chip)
+        zapChip = view.findViewById(R.id.email1_chip)
         minusChip = view.findViewById(R.id.minus_chip)
         plusChip = view.findViewById(R.id.plus_chip)
         countEdit = view.findViewById(R.id.editTextNumber)

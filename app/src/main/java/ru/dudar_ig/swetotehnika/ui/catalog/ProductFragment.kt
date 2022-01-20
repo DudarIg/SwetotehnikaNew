@@ -55,7 +55,7 @@ class ProductFragment : Fragment(R.layout.fragment_product) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentProductBinding.bind(view)
 
-        zapChip = view.findViewById(R.id.zap_chip)
+        zapChip = view.findViewById(R.id.email1_chip)
         minusChip = view.findViewById(R.id.minus_chip)
         plusChip = view.findViewById(R.id.plus_chip)
         countEdit = view.findViewById(R.id.editTextNumber)

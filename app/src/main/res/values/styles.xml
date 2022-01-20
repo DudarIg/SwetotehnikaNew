@@ -14,4 +14,13 @@
     <style name="Theme.Swetotehnika.Splash">
         <item name="android:windowBackground">@drawable/splash_background_drawable</item>
     </style>
+
+    <style name="MyActionBarTitle" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textColor">@color/yelow</item>
+    </style>
+    <style name="MyBar" parent="@style/Widget.AppCompat.Light.ActionBar.Solid">
+        <item name="background">@drawable/side_nav_bar</item>
+        <item name="titleTextStyle">@style/MyActionBarTitle</item>
+    </style>
+
 </resources>

@@ -5,14 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view"
+    <com.yandex.mapkit.mapview.MapView
+        android:id="@+id/yandex_map"
+        android:layout_marginBottom="30dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:listitem="@layout/layout_item" />
+        android:layout_height="match_parent"/>
 
 
 
-    <include layout="@layout/bottom_sheet" />
+    <include layout="@layout/bottom_sheet_contact" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
