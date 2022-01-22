@@ -1,10 +1,8 @@
 package ru.dudar_ig.swetotehnika.ui
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,13 +11,9 @@ import ru.dudar_ig.swetotehnika.KatId
 import ru.dudar_ig.swetotehnika.R
 import ru.dudar_ig.swetotehnika.adapter.HomeAdapter
 import ru.dudar_ig.swetotehnika.adapter.MyAdapter
-import ru.dudar_ig.swetotehnika.data.Cat2ViewModel
 import ru.dudar_ig.swetotehnika.data.HomeViewModel
 import ru.dudar_ig.swetotehnika.data.TitleViewModel
-import ru.dudar_ig.swetotehnika.data.TovarsViewModel
-import ru.dudar_ig.swetotehnika.databinding.FragmentOneBinding
 import ru.dudar_ig.swetotehnika.ui.catalog.ProductFragment
-
 
 class OneFragment : Fragment(R.layout.fragment_one) {
 
@@ -53,8 +47,6 @@ class OneFragment : Fragment(R.layout.fragment_one) {
                 R.id.fragment_container,
                 fragment)?.addToBackStack(null)?.commit()
         }
-
-
     }
     companion object {
         @JvmStatic

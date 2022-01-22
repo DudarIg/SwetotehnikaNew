@@ -15,7 +15,6 @@ class HomeAdapter(private val homeData: List<HomeData>):
 
     class HomeHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val titleV : TextView = itemView.findViewById(R.id.title_textView)
-        //val textV : TextView = itemView.findViewById(R.id.text_textView)
         val photoV: ImageView = itemView.findViewById(R.id.image_view)
     }
 
@@ -29,12 +28,6 @@ class HomeAdapter(private val homeData: List<HomeData>):
         val homeData = homeData[position]
         holder.photoV.setImageResource(homeData.foto)
         holder.titleV.text = homeData.title
-        //holder.textV.text = homeData.text
-
-//        holder.itemView.setOnClickListener {
-//            val intent = OneActivity.newIntent(myContext, cat.name, cat.color, age, cat.date)
-//            myContext.startActivity(intent)
-//        }
     }
 
     override fun getItemCount(): Int {

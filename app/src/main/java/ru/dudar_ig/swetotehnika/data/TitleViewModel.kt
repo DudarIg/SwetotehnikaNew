@@ -3,7 +3,6 @@ package ru.dudar_ig.swetotehnika.data
 import androidx.lifecycle.ViewModel
 import ru.dudar_ig.swetotehnika.R
 
-
 class TitleViewModel: ViewModel() {
     val lines1 = mutableListOf<HomeData>()
     val lines2 = mutableListOf<HomeData>()

@@ -1,21 +1,16 @@
 package ru.dudar_ig.swetotehnika.ui
 
-import android.content.ClipData
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.transition.Slide
 import android.transition.TransitionManager
 import android.view.Gravity
-import android.view.Menu
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import com.yandex.mapkit.MapKitFactory
 import ru.dudar_ig.swetotehnika.KatId
 import ru.dudar_ig.swetotehnika.R
 import ru.dudar_ig.swetotehnika.database.CartCountVM
@@ -49,10 +44,6 @@ class MainActivity : AppCompatActivity() {
         binding.searchLayout.setEndIconOnClickListener {
 
             closeKeyboard()
-
-//            TransitionManager.beginDelayedTransition(binding.transmis, Slide(Gravity.TOP))
-//            searchIsVisible = !searchIsVisible
-//            binding.searchLayout.visibility = if (searchIsVisible) View.VISIBLE else View.GONE
 
             val searchOld = binding.inputText.text.toString().trim()
             KatId.search = searchOld.replace(
