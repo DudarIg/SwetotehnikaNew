@@ -32,7 +32,6 @@ class MainActivity : AppCompatActivity() {
     private val cartCounts by viewModels<CartCountVM>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        Thread.sleep(2_000)
         setTheme(R.style.Theme_Swetotehnika)
 
         super.onCreate(savedInstanceState)
