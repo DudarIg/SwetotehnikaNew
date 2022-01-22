@@ -1,29 +1,22 @@
 <resources>
     <string name="app_name">ГК \"Светотехника\"</string>
     <string name="cat_name">Каталог продукции</string>
-    <string name="nav_header_title">https://swetotehnika.ru </string>
-    <string name="nav_header_subtitle">+7 (495) 798-05-32, (495) 798-82-47</string>
-    <string name="action_settings">На главную</string>
     <string name="menu_home">Главная</string>
     <string name="menu_gallery">Каталог</string>
-    <string name="menu_slideshow">Прайсы</string>
     <string name="menu_contact">Контакты</string>
     <string name="check_connection_text">Интернет-соединение отсутствует</string>
-
-    <string name="url">"https://swetotehnika.ru/"</string>
-    <string name="exit">Выход</string>
+    <string name="url">https://swetotehnika.ru</string>
     <string name="zakaz">Заказ</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Главная страница приложения</string>
     <string name="cart">Добавить</string>
-    <string name="zero_text">Корзина заказа пуста. Выберите товар.</string>
-    <string name="phone">Позвонить</string>
+    <string name="zero_text">Корзина пуста. Выберите товар.</string>
     <string name="name">Группа компаний \"Светотехника\"</string>
     <string name="present">
         Осуществляем продажу светильников, ламп и другой светотехнической продукции
         Российского и зарубежного производства с 2005 года. Продукция крупнейших заводов России
-        и зарубежья, производителей светотехники, в полном объеме представлена в нашей компании.
-        Мы предлагаем большой ассортимент осветительного оборудования различного назначения:
+        и зарубежья, производителей светотехники, в полном объеме представлена у нас по конкурентным ценам.
+        Мы предлагаем большой ассортимент осветительного оборудования различного назначения.
     </string>
 
 </resources>
