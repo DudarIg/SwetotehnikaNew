@@ -125,6 +125,7 @@ class ContactFragment : Fragment() {
         super.onStop()
         mapYandex.onStop()
         MapKitFactory.getInstance().onStop()
+        (activity as MainActivity).navLists[3].isClickable = true
     }
 
     companion object {

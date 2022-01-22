@@ -153,6 +153,11 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
         super.onStart()
     }
 
+    override fun onStop() {
+        (activity as MainActivity).navLists[2].isClickable = true
+        super.onStop()
+    }
+
     companion object {
         @JvmStatic
         fun newInstance(param2: String) = CartFragment().apply {

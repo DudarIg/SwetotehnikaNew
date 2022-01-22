@@ -62,4 +62,9 @@ class MainFragment : Fragment(R.layout.fragment_kat) {
         _binding = null
         super.onDestroyView()
     }
+
+    override fun onStop() {
+        (activity as MainActivity).navLists[1].isClickable = true
+        super.onStop()
+    }
 }

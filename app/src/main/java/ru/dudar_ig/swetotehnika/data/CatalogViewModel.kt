@@ -32,6 +32,13 @@ class SearchViewModel: ViewModel() {
     }
 }
 
+class HomeViewModel: ViewModel() {
+    val items : LiveData<List<Tovar>>?
+    init {
+        items = CatalogApiImpl.loadListHome()
+    }
+}
+
 class ProductViewModel: ViewModel() {
     val items : LiveData<List<Tovar>>?
     init {

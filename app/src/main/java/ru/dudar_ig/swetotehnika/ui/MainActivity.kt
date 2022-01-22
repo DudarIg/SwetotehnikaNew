@@ -1,11 +1,13 @@
 package ru.dudar_ig.swetotehnika.ui
 
+import android.content.ClipData
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.transition.Slide
 import android.transition.TransitionManager
 import android.view.Gravity
+import android.view.Menu
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
@@ -26,7 +28,7 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityMainBinding
     private var searchIsVisible = false
-    private var navLists = mutableListOf<View>()
+    var navLists = mutableListOf<View>()
     private val cartCounts by viewModels<CartCountVM>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -60,13 +62,14 @@ class MainActivity : AppCompatActivity() {
                 true // ignore case Boolean = false
             )
             val fragment = ListTovarFragment.newInstance(0, "Поиск: <${KatId.search}>")
-            supportFragmentManager?.beginTransaction()?.replace(R.id.fragment_container,
-                fragment)?.addToBackStack(null)?.commit()
+            supportFragmentManager.beginTransaction().replace(R.id.fragment_container,
+                fragment).addToBackStack(null).commit()
         }
 
         val mainFragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
         if (mainFragment == null) {
             binding.toolbarTitle.text = resources.getString(R.string.app_name)
+            navLists[0].isClickable = false
             val fragment = OneFragment.newInstance()
             supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, fragment)
@@ -78,7 +81,6 @@ class MainActivity : AppCompatActivity() {
         (0..3).forEach {
             navLists[it].isClickable = if (it == iters)  false else true
         }
-        if (iters == -1) binding.toolbarTitle.text = resources.getString(R.string.app_name)
     }
 
     fun titleText(text: String) {
@@ -86,38 +88,36 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initBottomNav() {
+        navLists.add(findViewById(R.id.nav_home))
         navLists.add(findViewById(R.id.nav_catalog))
         navLists.add(findViewById(R.id.nav_zakaz))
-        navLists.add(findViewById(R.id.nav_price))
         navLists.add(findViewById(R.id.nav_contact))
 
         binding.bottomNav.setOnItemSelectedListener { item ->
             val fragment : Fragment
             when (item.itemId) {
-                R.id.nav_catalog -> {
+                R.id.nav_home -> {
                     navClickable(0)
+                    binding.toolbarTitle.text = resources.getString(R.string.app_name)
+                    fragment = OneFragment.newInstance()
+                    startFragment(fragment)
+                }
+                R.id.nav_catalog -> {
+                    navClickable(1)
                     binding.toolbarTitle.text = resources.getString(R.string.cat_name)
                     fragment = MainFragment.newInstance()
                     startFragment(fragment)
                 }
                 R.id.nav_zakaz -> {
-                    navClickable(1)
+                    navClickable(2)
                     fragment = CartFragment.newInstance("Ваш заказ:")
                     startFragment(fragment)
                 }
-                R.id.nav_price -> {
-                    navClickable(2)
-                    Toast.makeText(this, "Выбран прайс", Toast.LENGTH_SHORT).show()
-                    fragment = MainFragment.newInstance()
-                    startFragment(fragment)
-                }
+
                 R.id.nav_contact -> {
-                //    Toast.makeText(this, "Выбран контакт", Toast.LENGTH_SHORT).show()
                     navClickable(3)
                     fragment = ContactFragment.newInstance("Контакты")
                     startFragment(fragment)
-//                    val intent = Intent(this, ContactActivity::class.java)
-//                    startActivity(intent)
 
                 }
                 else -> {
