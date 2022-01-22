@@ -68,7 +68,7 @@ class MainActivity : AppCompatActivity() {
 
         val mainFragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
         if (mainFragment == null) {
-            binding.toolbarTitle.text = resources.getString(R.string.app_name)
+            binding.toolbarTitle.text = resources.getString(R.string.name0)
             navLists[0].isClickable = false
             val fragment = OneFragment.newInstance()
             supportFragmentManager.beginTransaction()
@@ -98,7 +98,6 @@ class MainActivity : AppCompatActivity() {
             when (item.itemId) {
                 R.id.nav_home -> {
                     navClickable(0)
-                    binding.toolbarTitle.text = resources.getString(R.string.app_name)
                     fragment = OneFragment.newInstance()
                     startFragment(fragment)
                 }
@@ -149,7 +148,6 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         cartCounts.cartCount.observe(this, Observer {
-         //   Toast.makeText(this, "Продукции в заказе: $it", Toast.LENGTH_SHORT).show()
             if (it == 0) {
                 binding.bottomNav.removeBadge(R.id.nav_zakaz)
             } else {

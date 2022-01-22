@@ -38,7 +38,6 @@
         android:textStyle="normal"
         android:textSize="16dp"
         android:textColor="@color/black"
-
         android:text="@string/present"/>
 
 
@@ -46,11 +45,24 @@
     android:id="@+id/recycler1"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"/>
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
+    <TextView
+        android:layout_margin="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:textStyle="normal"
+        android:textSize="16dp"
+        android:textColor="@color/black"
+        android:text="@string/pop_tovar"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
     </LinearLayout>
 
    </ScrollView>
