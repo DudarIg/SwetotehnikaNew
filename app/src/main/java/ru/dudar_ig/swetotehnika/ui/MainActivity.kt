@@ -1,13 +1,17 @@
 package ru.dudar_ig.swetotehnika.ui
 
 import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import android.os.Bundle
 import android.transition.Slide
 import android.transition.TransitionManager
 import android.view.Gravity
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -32,6 +36,26 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val internet = isNetworkConnect(this)
+        if (!internet) {
+            val builder = AlertDialog.Builder(this)
+            builder.apply {
+                setTitle("Интернет")
+                setMessage("Отсутствует соединение!")
+                setIcon(R.drawable.ic_wifi_off)
+                setPositiveButton(
+                    "Ok"
+                ) { dialog, id ->
+                    val filmsDbRepo = FilmsDbRepo.get()
+                    filmsDbRepo.deleteFilm(film)
+                }
+                setNegativeButton(
+                    "Cancel"
+                ) { dialog, id ->
+                }
+            }.show()
+        }
 
         initBottomNav()
 
@@ -144,6 +168,13 @@ class MainActivity : AppCompatActivity() {
                 binding.bottomNav.getOrCreateBadge(R.id.nav_zakaz)
             }
         })
+    }
+
+    fun isNetworkConnect(context: Context): Boolean {
+        val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        var activeNetworkInfo: NetworkInfo? = null
+        activeNetworkInfo = cm.activeNetworkInfo
+        return activeNetworkInfo != null && activeNetworkInfo.isConnectedOrConnecting
     }
 
 

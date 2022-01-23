@@ -24,6 +24,9 @@ class OneFragment : Fragment(R.layout.fragment_one) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
+
         (activity as MainActivity).binding.toolbarTitle.text = resources.getString(R.string.name0)
         val recycler1: RecyclerView = view.findViewById(R.id.recycler1)
         recycler1.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
