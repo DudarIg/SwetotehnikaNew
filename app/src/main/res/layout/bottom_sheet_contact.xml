@@ -5,33 +5,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/bottom_sheet_contact"
     android:layout_width="match_parent"
-    android:padding="8dp"
-    android:layout_height="280dp"
+    android:paddingStart="16dp"
+    android:paddingTop="4dp"
+    android:layout_height="320dp"
     android:elevation="5dp"
     android:background="@color/ic_launcher_background"
     app:behavior_hideable="true"
     app:behavior_peekHeight="30dp"
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
-    <View
-        android:id="@+id/bottom_sheet_line"
-        android:layout_width="65dp"
-        android:layout_height="3dp"
-        android:background="@color/blue"
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_keyboard_arrow" />
+
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
+        android:textColor="@color/black"
         android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
+        android:layout_marginTop="32dp"
         android:text="@string/name"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/bottom_sheet_line" />
+        app:layout_constraintTop_toTopOf="@+id/imageView2" />
 
     <TextView
         android:id="@+id/textView3"
@@ -60,12 +63,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Время работы: пн - пт с 9-00 до 20-00"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
     <com.google.android.material.chip.Chip
         android:id="@+id/email1_chip"
         style="@style/chip_color"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:text="info@swetotehnika.ru"
         android:textAlignment="center"
         android:textColor="@color/black"
@@ -75,7 +86,7 @@
         app:iconStartPadding="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5"
+        app:layout_constraintTop_toBottomOf="@+id/textView6"
         tools:ignore="MissingConstraints" />
 
 
