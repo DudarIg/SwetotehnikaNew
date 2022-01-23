@@ -26,29 +26,34 @@ class OneFragment : Fragment(R.layout.fragment_one) {
         super.onViewCreated(view, savedInstanceState)
 
 
-
         (activity as MainActivity).binding.toolbarTitle.text = resources.getString(R.string.name0)
         val recycler1: RecyclerView = view.findViewById(R.id.recycler1)
-        recycler1.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        recycler1.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         recycler1.adapter = HomeAdapter(titleViewModel.lines1)
 
         val recycler2: RecyclerView = view.findViewById(R.id.recycler2)
-        recycler2.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        recycler2.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         recycler2.adapter = HomeAdapter(titleViewModel.lines2)
 
-        KatId.kat = 3
-        val recycler3: RecyclerView = view.findViewById(R.id.recycler3)
-        recycler3.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        recycler3.adapter = myAdapter
-        homeViewModel.items?.observe(this, Observer {
-            myAdapter.updateAdapter(it)
-        })
 
-        myAdapter.funProductClick = {
-            val fragment = ProductFragment.newInstance(it.id!!.toInt(), it.name!!)
-            activity?.supportFragmentManager?.beginTransaction()?.replace(
-                R.id.fragment_container,
-                fragment)?.addToBackStack(null)?.commit()
+        if ((activity as MainActivity).isNetworkConnect(context)) {
+
+            KatId.kat = 3
+            val recycler3: RecyclerView = view.findViewById(R.id.recycler3)
+            recycler3.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            recycler3.adapter = myAdapter
+            homeViewModel.items?.observe(this, Observer {
+                myAdapter.updateAdapter(it)
+            })
+
+            myAdapter.funProductClick = {
+                val fragment = ProductFragment.newInstance(it.id!!.toInt(), it.name!!)
+                activity?.supportFragmentManager?.beginTransaction()?.replace(
+                    R.id.fragment_container,
+                    fragment)?.addToBackStack(null)?.commit()
+            }
         }
     }
     companion object {

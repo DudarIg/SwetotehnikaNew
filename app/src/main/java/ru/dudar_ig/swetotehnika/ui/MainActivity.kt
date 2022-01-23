@@ -1,11 +1,15 @@
 package ru.dudar_ig.swetotehnika.ui
 
 import android.content.Context
+import android.content.Intent
 import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import android.net.NetworkInfo
+import android.os.Build
 import android.os.Bundle
 import android.transition.Slide
 import android.transition.TransitionManager
+import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -18,6 +22,7 @@ import androidx.lifecycle.Observer
 import ru.dudar_ig.swetotehnika.KatId
 import ru.dudar_ig.swetotehnika.R
 import ru.dudar_ig.swetotehnika.database.CartCountVM
+import ru.dudar_ig.swetotehnika.database.ProductDbRepo
 import ru.dudar_ig.swetotehnika.databinding.ActivityMainBinding
 import ru.dudar_ig.swetotehnika.ui.catalog.ListTovarFragment
 import ru.dudar_ig.swetotehnika.ui.catalog.MainFragment
@@ -31,33 +36,29 @@ class MainActivity : AppCompatActivity() {
     private val cartCounts by viewModels<CartCountVM>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        if (!isNetworkConnect(this)) {
+            val intent = Intent(this, NoInternetActivity::class.java)
+            startActivity(intent)
+        }
+        ProductDbRepo.initialize(this)
+
         setTheme(R.style.Theme_Swetotehnika)
 
         super.onCreate(savedInstanceState)
+
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val internet = isNetworkConnect(this)
-        if (!internet) {
-            val builder = AlertDialog.Builder(this)
-            builder.apply {
-                setTitle("Интернет")
-                setMessage("Отсутствует соединение!")
-                setIcon(R.drawable.ic_wifi_off)
-                setPositiveButton(
-                    "Ok"
-                ) { dialog, id ->
-                    val filmsDbRepo = FilmsDbRepo.get()
-                    filmsDbRepo.deleteFilm(film)
-                }
-                setNegativeButton(
-                    "Cancel"
-                ) { dialog, id ->
-                }
-            }.show()
-        }
+
+
+
 
         initBottomNav()
+
+
+
 
         binding.imageView.setOnClickListener {
             TransitionManager.beginDelayedTransition(binding.transmis, Slide(Gravity.TOP))
@@ -79,6 +80,8 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.beginTransaction().replace(R.id.fragment_container,
                 fragment).addToBackStack(null).commit()
         }
+
+
 
         val mainFragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
         if (mainFragment == null) {
@@ -170,12 +173,31 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    fun isNetworkConnect(context: Context): Boolean {
-        val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        var activeNetworkInfo: NetworkInfo? = null
-        activeNetworkInfo = cm.activeNetworkInfo
-        return activeNetworkInfo != null && activeNetworkInfo.isConnectedOrConnecting
+    fun isNetworkConnect(context: Context?): Boolean {
+        if (context == null) return false
+        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            val capabilities = connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
+            if (capabilities != null) {
+                when {
+                    capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> {
+                        return true
+                    }
+                    capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> {
+                        return true
+                    }
+                    capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> {
+                        return true
+                    }
+                }
+            }
+        } else {
+            val activeNetworkInfo = connectivityManager.activeNetworkInfo
+            if (activeNetworkInfo != null && activeNetworkInfo.isConnected) {
+                return true
+            }
+        }
+        return false
     }
-
 
 }
