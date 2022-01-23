@@ -37,7 +37,6 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, NoInternetActivity::class.java)
             startActivity(intent)
         }
-      //  ProductDbRepo.initialize(this)
 
         setTheme(R.style.Theme_Swetotehnika)
         super.onCreate(savedInstanceState)
