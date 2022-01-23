@@ -137,8 +137,8 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
         val mIntent = Intent(Intent.ACTION_SEND)
         mIntent.data = Uri.parse("mailto:")
         mIntent.type = "text/plain"
-        mIntent.putExtra(Intent.EXTRA_EMAIL, arrayOf("pakad@mail.ru", "kulakov@swetotehnika.ru"))
-        mIntent.putExtra(Intent.EXTRA_SUBJECT, "Заказ товара - TECT")
+        mIntent.putExtra(Intent.EXTRA_EMAIL, arrayOf("kulakov@swetotehnika.ru"))
+        mIntent.putExtra(Intent.EXTRA_SUBJECT, "Заказ товара из приложения")
         mIntent.putExtra(Intent.EXTRA_TEXT, mailMessage)
         try {
             startActivity(Intent.createChooser(mIntent, "Выберите почтовый клиент..."))
