@@ -4,18 +4,14 @@ import android.content.Context
 import android.content.Intent
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
-import android.net.NetworkInfo
 import android.os.Build
 import android.os.Bundle
 import android.transition.Slide
 import android.transition.TransitionManager
-import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -41,25 +37,14 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, NoInternetActivity::class.java)
             startActivity(intent)
         }
-        ProductDbRepo.initialize(this)
+      //  ProductDbRepo.initialize(this)
 
         setTheme(R.style.Theme_Swetotehnika)
-
         super.onCreate(savedInstanceState)
-
-
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
-
-
-
         initBottomNav()
-
-
-
-
         binding.imageView.setOnClickListener {
             TransitionManager.beginDelayedTransition(binding.transmis, Slide(Gravity.TOP))
             searchIsVisible = !searchIsVisible
@@ -80,8 +65,6 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.beginTransaction().replace(R.id.fragment_container,
                 fragment).addToBackStack(null).commit()
         }
-
-
 
         val mainFragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
         if (mainFragment == null) {
@@ -141,7 +124,6 @@ class MainActivity : AppCompatActivity() {
                     startFragment(fragment)
                 }
             }
-
             true
         }
     }

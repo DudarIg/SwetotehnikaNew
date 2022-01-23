@@ -21,4 +21,15 @@
         android:textStyle="bold"
         android:text="Отсутствует подключение к Интернет!!!" />
 
+    <com.google.android.material.chip.Chip
+        android:id="@+id/close_chip"
+        android:layout_width="wrap_content"
+        android:textColor="@color/colorPrimaryRed"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+
+        android:layout_marginTop="36dp"
+        android:text="@string/close"
+        app:chipIcon="@drawable/ic_close" />
+
 </FrameLayout>
