@@ -13,6 +13,7 @@ class NoInternetActivity : AppCompatActivity() {
         val closeChip = findViewById<Chip>(R.id.close_chip)
         closeChip.setOnClickListener {
             finishAffinity()
+            System.exit(0)
         }
     }
 }
