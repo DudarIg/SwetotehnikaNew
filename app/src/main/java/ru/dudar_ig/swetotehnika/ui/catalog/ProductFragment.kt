@@ -40,7 +40,7 @@ class ProductFragment : Fragment(R.layout.fragment_product) {
     private var _binding: FragmentProductBinding?  = null
     private val binding get() = _binding!!
 
-    private val myAdapter = MyAdapter(ArrayList())
+    private val myAdapter = MyAdapter()
     private val productViewModel by viewModels<ProductViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {

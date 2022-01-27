@@ -13,7 +13,9 @@ import ru.dudar_ig.swetotehnika.R
 import ru.dudar_ig.swetotehnika.data.Tovar
 
 
-class MyAdapter(var listArray: ArrayList<Tovar>) : RecyclerView.Adapter<MyAdapter.MyHolder>() {
+class MyAdapter: RecyclerView.Adapter<MyAdapter.MyHolder>() {
+
+    var listArray = ArrayList<Tovar>()
 
     var funCatClick: ((Tovar) -> Unit)? = null
     var funListClick: ((Tovar) -> Unit)? = null

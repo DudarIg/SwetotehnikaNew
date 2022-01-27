@@ -21,7 +21,7 @@ class MainFragment : Fragment(R.layout.fragment_kat) {
     private var _binding: FragmentKatBinding?  = null
     private val binding get() = _binding!!
 
-    private val myAdapter = MyAdapter(ArrayList())
+    private val myAdapter = MyAdapter()
     private val catViewModel by viewModels<CatViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

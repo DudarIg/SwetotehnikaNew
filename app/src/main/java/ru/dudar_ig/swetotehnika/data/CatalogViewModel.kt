@@ -40,8 +40,15 @@ class HomeViewModel: ViewModel() {
 }
 
 class ProductViewModel: ViewModel() {
-    val items : LiveData<List<Tovar>>?
+    val items: LiveData<List<Tovar>>?
+
     init {
         items = CatalogApiImpl.loadProduct(KatId.id)
+    }
+}
+class NewsViewModel: ViewModel() {
+    val items : LiveData<List<News>>
+    init {
+        items = CatalogApiImpl.loadNewsList()
     }
 }

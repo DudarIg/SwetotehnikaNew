@@ -25,7 +25,7 @@ class Cat2Fragment : Fragment(R.layout.fragment_kat) {
     private var _binding: FragmentKatBinding?  = null
     private val binding get() = _binding!!
 
-    private val myAdapter = MyAdapter(ArrayList())
+    private val myAdapter = MyAdapter()
     private val cat2ViewModel by viewModels<Cat2ViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {

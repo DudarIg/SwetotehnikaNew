@@ -29,6 +29,13 @@ interface CatalogApi {
     @GET("/api/product/search.php")
     fun getListSearch(@Query("s") word:String): Call<ApiCatalog>
 
+    @GET("/api/product/news.php")
+    fun getNewsList(): Call<ApiNews>
+
+    @GET("/api/product/news_one.php")
+    fun getNews(@Query("n") idd:Int): Call<ApiNews>
+
+
 }
 
 object CatalogApiImpl {
@@ -39,6 +46,28 @@ object CatalogApiImpl {
 
     private val apiService = retrofit.create(CatalogApi::class.java)
 
+    fun loadNewsList(): LiveData<List<News>> {
+        val responseLiveData: MutableLiveData<List<News>> = MutableLiveData()
+        apiService.getNewsList().enqueue(object : Callback<ApiNews> {
+            override fun onResponse(call: Call<ApiNews>, response: Response<ApiNews>) {
+                val jsonNews: ApiNews? = response.body()
+                val newList = mutableListOf<News>()
+                jsonNews?.results?.forEach {
+                    val news = News()
+                    news.id = it.id
+                    news.date = it.date
+                    news.name = it.name
+                    news.event = it.event
+                    newList.add(news)
+                }
+                responseLiveData.postValue(newList)
+            }
+            override fun onFailure(call: Call<ApiNews>, t: Throwable) {
+                TODO("Not yet implemented")
+            }
+        })
+        return responseLiveData
+    }
     fun loadListCat(): LiveData<List<Tovar>> {
         val responseLiveData: MutableLiveData<List<Tovar>> = MutableLiveData()
         apiService.getListCat().enqueue(object : Callback<ApiCatalog> {

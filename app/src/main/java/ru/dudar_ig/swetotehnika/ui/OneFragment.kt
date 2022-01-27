@@ -11,7 +11,9 @@ import ru.dudar_ig.swetotehnika.KatId
 import ru.dudar_ig.swetotehnika.R
 import ru.dudar_ig.swetotehnika.adapter.HomeAdapter
 import ru.dudar_ig.swetotehnika.adapter.MyAdapter
+import ru.dudar_ig.swetotehnika.adapter.NewsAdapter
 import ru.dudar_ig.swetotehnika.data.HomeViewModel
+import ru.dudar_ig.swetotehnika.data.NewsViewModel
 import ru.dudar_ig.swetotehnika.data.TitleViewModel
 import ru.dudar_ig.swetotehnika.ui.catalog.ProductFragment
 
@@ -19,8 +21,10 @@ class OneFragment : Fragment(R.layout.fragment_one) {
 
     private val titleViewModel by viewModels<TitleViewModel>()
 
-    private val myAdapter = MyAdapter(ArrayList())
+    private val myAdapter = MyAdapter()
+    private val newsAdapter = NewsAdapter()
     private val homeViewModel by viewModels<HomeViewModel>()
+    private val newsViewModel by viewModels<NewsViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -51,9 +55,24 @@ class OneFragment : Fragment(R.layout.fragment_one) {
             myAdapter.funProductClick = {
                 val fragment = ProductFragment.newInstance(it.id!!.toInt(), it.name!!)
                 activity?.supportFragmentManager?.beginTransaction()?.replace(
-                    R.id.fragment_container,
-                    fragment)?.addToBackStack(null)?.commit()
+                    R.id.fragment_container, fragment)?.addToBackStack(null)?.commit()
             }
+
+            val newsRrecycler: RecyclerView = view.findViewById(R.id.news_recycler)
+            newsRrecycler.layoutManager =
+                LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            newsRrecycler.adapter = newsAdapter
+            newsViewModel.items.observe(this, Observer {
+                newsAdapter.updateAdapter(it)
+            })
+
+            newsAdapter.funNewsClick = {
+                val fragment = NewsFragment.newInstance(it.event)
+                activity?.supportFragmentManager?.beginTransaction()?.replace(
+                    R.id.fragment_container, fragment)?.addToBackStack(null)?.commit()
+            }
+
+
         }
     }
     companion object {
