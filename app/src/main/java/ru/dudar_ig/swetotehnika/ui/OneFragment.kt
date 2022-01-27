@@ -11,7 +11,9 @@ import ru.dudar_ig.swetotehnika.KatId
 import ru.dudar_ig.swetotehnika.R
 import ru.dudar_ig.swetotehnika.adapter.HomeAdapter
 import ru.dudar_ig.swetotehnika.adapter.MyAdapter
+import ru.dudar_ig.swetotehnika.adapter.NewsAdapter
 import ru.dudar_ig.swetotehnika.data.HomeViewModel
+import ru.dudar_ig.swetotehnika.data.NewsViewModel
 import ru.dudar_ig.swetotehnika.data.TitleViewModel
 import ru.dudar_ig.swetotehnika.ui.catalog.ProductFragment
 
@@ -21,6 +23,7 @@ class OneFragment : Fragment(R.layout.fragment_one) {
 
     private val myAdapter = MyAdapter(ArrayList())
     private val homeViewModel by viewModels<HomeViewModel>()
+    private val newsViewModel by viewModels<NewsViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -40,6 +43,11 @@ class OneFragment : Fragment(R.layout.fragment_one) {
 
         if ((activity as MainActivity).isNetworkConnect(context)) {
 
+            val newsRrecycler: RecyclerView = view.findViewById(R.id.news_recycler)
+            newsRrecycler.layoutManager =
+                LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            newsRrecycler.adapter = NewsAdapter(newsViewModel.items)
+
             KatId.kat = 3
             val recycler3: RecyclerView = view.findViewById(R.id.recycler3)
             recycler3.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
@@ -54,6 +62,9 @@ class OneFragment : Fragment(R.layout.fragment_one) {
                     R.id.fragment_container,
                     fragment)?.addToBackStack(null)?.commit()
             }
+
+
+
         }
     }
     companion object {

@@ -55,8 +55,22 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler3"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
+        android:layout_height="wrap_content">
+    </androidx.recyclerview.widget.RecyclerView>
+    <TextView
+        android:layout_margin="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:textStyle="normal"
+        android:textSize="16dp"
+        android:textColor="@color/black"
+        android:text="@string/news"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/news_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </androidx.recyclerview.widget.RecyclerView>
     </LinearLayout>
 
    </ScrollView>
