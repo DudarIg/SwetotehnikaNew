@@ -13,6 +13,7 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import ru.dudar_ig.swetotehnika.KatId
@@ -28,6 +29,7 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityMainBinding
     private var searchIsVisible = false
+    private var lightIsVisible = false
     var navLists = mutableListOf<View>()
     private val cartCounts by viewModels<CartCountVM>()
 
@@ -47,13 +49,21 @@ class MainActivity : AppCompatActivity() {
         binding.imageView.setOnClickListener {
             TransitionManager.beginDelayedTransition(binding.transmis, Slide(Gravity.TOP))
             searchIsVisible = !searchIsVisible
-            binding.searchLayout.visibility = if (searchIsVisible) View.VISIBLE else View.GONE
+            binding.searchLayout.isVisible = if (searchIsVisible) true else false
+        }
+
+        binding.imageLight.setOnClickListener {
+            TransitionManager.beginDelayedTransition(binding.transmis1, Slide(Gravity.TOP))
+            lightIsVisible = !lightIsVisible
+            binding.cardLight.isVisible = if (lightIsVisible) true else false
+        }
+
+        binding.raschetChip.setOnClickListener {
+            binding.itogTextview.text = raschet_heigth()
         }
 
         binding.searchLayout.setEndIconOnClickListener {
-
             closeKeyboard()
-
             val searchOld = binding.inputText.text.toString().trim()
             KatId.search = searchOld.replace(
                 ' ', // old char
@@ -74,6 +84,23 @@ class MainActivity : AppCompatActivity() {
                 .replace(R.id.fragment_container, fragment)
                 .commit()
         }
+    }
+
+    private fun raschet_heigth(): String {
+        val k_h = listOf(1.0, 1.2, 1.5, 2.0)
+        val k_type = listOf(300, 500, 200, 100, 75, 75, 50, 150, 200, 50, 75, 300, 20, 100)
+        if (binding.sEditText.text.toString().trim() == ".") {
+            return ""
+        }
+        if (binding.sEditText.text.toString().trim().length == 0) {
+            return ""
+        }
+        val s : Float = binding.sEditText.text.toString().trim().toFloat()
+
+        val h = k_h[binding.hhSp.selectedItemPosition]
+        val type = k_type[binding.spinner.selectedItemPosition]
+        val svet = (s*h*type).toInt().toString()
+        return "$svet Люмен"
     }
 
     fun navClickable(iters: Int) {
