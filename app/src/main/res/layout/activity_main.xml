@@ -34,6 +34,15 @@ tools:context=".ui.MainActivity">
                     android:ellipsize="end"
                     android:maxLines="1"
                     tools:text="заголовок" />
+                <ImageView
+                    android:id="@+id/image_light"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginStart="8dp"
+                    android:layout_gravity="right"
+                    android:layout_weight="0.1"
+                    app:srcCompat="@drawable/ic_baseline_wb_incandescent_24" />
 
                 <ImageView
                     android:id="@+id/imageView"
@@ -78,6 +87,144 @@ tools:context=".ui.MainActivity">
         </com.google.android.material.textfield.TextInputLayout>
 
     </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/transmis1">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_light"
+            android:visibility="gone"
+            android:layout_marginBottom="2dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:cardBackgroundColor="@color/yelow"
+            app:cardCornerRadius="8dp">
+            <LinearLayout
+                android:layout_margin="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="8dp"
+                android:paddingBottom="4dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:paddingBottom="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Расчет освещенности помещения по СНиП"
+                    android:textAllCaps="false"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"/>
+
+                <LinearLayout
+                    android:paddingBottom="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="4dp"
+                        android:text="Площадь помещения (кв.м):"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+                    <EditText
+                        android:layout_width="70dp"
+                        android:id="@+id/s_editText"
+                        android:background="@color/background"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:layout_weight="1"
+                        android:ems="10"
+                        android:inputType="numberDecimal"
+                        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+                </LinearLayout>
+
+            <LinearLayout
+                android:paddingBottom="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="4dp"
+                        android:text="Высота потолка:"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+                    <Spinner
+                    android:background="@color/background"
+                    android:id="@+id/hh_sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/height"
+                    android:popupElevation="10dp"
+                    android:spinnerMode="dropdown" />
+            </LinearLayout>
+                <LinearLayout
+                    android:paddingBottom="8dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="4dp"
+                        android:text="Тип помещения:"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <Spinner
+                        android:background="@color/background"
+                        android:id="@+id/spinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:entries="@array/type"
+                        android:popupElevation="10dp"
+                        android:spinnerMode="dropdown" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/itog_textview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="4dp"
+                        android:textStyle="bold"
+                        android:text=""
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+
+                    <com.google.android.material.chip.Chip
+                        style="@style/chip_color"
+                        android:id="@+id/raschet_chip"
+                        android:layout_width="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_height="wrap_content"
+                        android:text="Расчитать"
+                        app:chipIcon="@drawable/ic_wifi"/>
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+
+
+    </FrameLayout>
+
 
     <FrameLayout
     android:id="@+id/fragment_container"

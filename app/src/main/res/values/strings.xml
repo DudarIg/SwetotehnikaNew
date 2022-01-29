@@ -23,5 +23,26 @@
     <string name="pop_tovar">Популярные товары:</string>
     <string name="close">Закрыть</string>
     <string name="news">Новости:</string>
-
+    <string-array name="type">
+        <item>Офис общего назначения с компьютером</item>
+        <item>Офис, в котором ведутся чертежные работы</item>
+        <item>Зал для конференций, переговорная комната</item>
+        <item>Эскалатор, лестница</item>
+        <item>Холл, коридор</item>
+        <item>Архив</item>
+        <item>Подсобные помещения, кладовая</item>
+        <item>Жилая комната, кухня</item>
+        <item>Детская комната</item>
+        <item>Ванная,душевая,санузел,квартирные коридоры и холлы</item>
+        <item>Гардеробная</item>
+        <item>Кабинет, библиотека</item>
+        <item>Лестница</item>
+        <item>Сауна, бассейн</item>
+    </string-array>
+    <string-array name="height">
+       <item>от 2,5 до 2,7 метра</item>
+       <item>от 2,7 до 3 метра</item>
+       <item>от 3 до 3,5 метра</item>
+       <item>от 3,5 до 4,5 метра</item>
+    </string-array>
 </resources>
