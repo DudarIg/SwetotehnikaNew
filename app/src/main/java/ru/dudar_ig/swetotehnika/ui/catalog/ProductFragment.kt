@@ -97,7 +97,7 @@ class ProductFragment : Fragment(R.layout.fragment_product) {
             }
         }
 
-        productViewModel.items?.observe(this, Observer {
+        productViewModel.items?.observe(viewLifecycleOwner, Observer {
             KatId.kat = 4
             it ?: return@Observer
             myAdapter.updateAdapter(it)

@@ -37,7 +37,7 @@ class MainFragment : Fragment(R.layout.fragment_kat) {
                     fragment)?.addToBackStack(null)?.commit()
         }
 
-        catViewModel.items?.observe(this, Observer {
+        catViewModel.items?.observe(viewLifecycleOwner, Observer {
             KatId.kat = 1
             it ?: return@Observer
             myAdapter.updateAdapter(it)

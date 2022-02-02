@@ -54,7 +54,7 @@ class ListTovarFragment : Fragment(R.layout.fragment_kat) {
         }
 
         if (KatId.id != 0 && KatId.search == "") {
-            tovarsViewModel.items?.observe(this, Observer {
+            tovarsViewModel.items?.observe(viewLifecycleOwner, Observer {
                 binding.searchZero.isVisible = false
                 KatId.kat = 3
                 it ?: return@Observer
@@ -62,7 +62,7 @@ class ListTovarFragment : Fragment(R.layout.fragment_kat) {
                 binding.pBar.isVisible = false
             })
         } else {
-            searchViewModel.items?.observe(this, Observer {
+            searchViewModel.items?.observe(viewLifecycleOwner, Observer {
                 KatId.kat = 3
                 it ?: return@Observer
                 myAdapter.updateAdapter(it)

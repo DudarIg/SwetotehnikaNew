@@ -116,19 +116,19 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
         }
 
 
-        productsCartVM.listProd.observe(this, Observer {
+        productsCartVM.listProd.observe(viewLifecycleOwner, Observer {
             it ?: return@Observer
             cartAdapter.updateAdapter(it)
             if (cartAdapter.itemCount == 0) {
                 binding.zeroTv.isVisible = true
+                binding.zeroIv.isVisible = true
                 (activity as MainActivity).binding.bottomNav.removeBadge(R.id.nav_zakaz)
             } else {
                 binding.zeroTv.isVisible = false
+                binding.zeroIv.isVisible = false
                 (activity as MainActivity).binding.bottomNav.getOrCreateBadge(R.id.nav_zakaz)
 
             }
-
-
         })
 
     }
