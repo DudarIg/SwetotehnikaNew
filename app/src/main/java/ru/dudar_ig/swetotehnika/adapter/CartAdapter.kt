@@ -53,8 +53,12 @@ class CartAdapter( var listProd: ArrayList<Product>):
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+
         val product = listProd[position]
         if (getItemViewType(position) == TOVAR) {
+            if (position == 0) {
+                allSumma = 0f
+            }
             holder as TovarHolder
             allSumma = allSumma + holder.setData(product)
             holder.delIb.setOnClickListener {
