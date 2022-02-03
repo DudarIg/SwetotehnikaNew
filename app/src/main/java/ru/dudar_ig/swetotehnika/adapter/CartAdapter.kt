@@ -11,7 +11,7 @@ import ru.dudar_ig.swetotehnika.database.Product
 
 class CartAdapter( var listProd: ArrayList<Product>):
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    var allSumma = 0f
+    private var allSumma = 0f
     var funDelClick: ((Product) -> Unit)? = null
     var funEditClick: ((Product) -> Unit)? = null
     var funItogClick: ((ArrayList<Product>) -> Unit)? = null
@@ -56,10 +56,10 @@ class CartAdapter( var listProd: ArrayList<Product>):
 
         val product = listProd[position]
         if (getItemViewType(position) == TOVAR) {
+            holder as TovarHolder
             if (position == 0) {
                 allSumma = 0f
             }
-            holder as TovarHolder
             allSumma = allSumma + holder.setData(product)
             holder.delIb.setOnClickListener {
                 funDelClick?.invoke(product)
