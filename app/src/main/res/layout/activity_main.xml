@@ -95,7 +95,7 @@ tools:context=".ui.MainActivity">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/card_light"
-            android:visibility="visible"
+            android:visibility="gone"
             android:layout_marginBottom="2dp"
             android:layout_marginTop="5dp"
             android:layout_marginEnd="8dp"
