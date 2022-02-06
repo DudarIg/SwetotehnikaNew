@@ -95,7 +95,7 @@ tools:context=".ui.MainActivity">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/card_light"
-            android:visibility="gone"
+            android:visibility="visible"
             android:layout_marginBottom="2dp"
             android:layout_marginTop="5dp"
             android:layout_marginEnd="8dp"
@@ -139,6 +139,7 @@ tools:context=".ui.MainActivity">
                     <EditText
                         android:layout_width="70dp"
                         android:id="@+id/s_editText"
+                        android:gravity="center"
                         android:background="@color/background"
                         android:layout_height="wrap_content"
                         android:text="0"
